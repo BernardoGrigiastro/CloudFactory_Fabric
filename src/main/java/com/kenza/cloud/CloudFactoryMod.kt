@@ -1,28 +1,35 @@
 package com.kenza.cloud
 
 import com.kenza.cloud.CloudFactoryMod.Companion.MOD_ID
+import com.kenza.cloud.block.Blocks.configCloudsBlocks
+import com.kenza.cloud.block.CloudGeneratorBlock
+import com.kenza.cloud.block.CloudGeneratorBlock.Companion.CLOUD_GENERATOR_ID
+import com.kenza.cloud.block.CloudGeneratorBlockEntity
+import com.kenza.cloud.block.CloudGeneratorHandler
 import com.kenza.cloud.utils.openLastWorldOnInit
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
+import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
+import net.minecraft.block.BlockState
 import net.minecraft.block.Material
+import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.item.BlockItem
-import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
-import net.minecraft.sound.BlockSoundGroup
+import net.minecraft.screen.ScreenHandlerType
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import org.apache.logging.log4j.LogManager.getLogger
+import registerScreenHandler
 
 class CloudFactoryMod : ModInitializer {
 
 
     //data get entity @music_disc_cleopona.json SelectedItem
     //give @p iron_pickaxe{Damage:10000} 20
-
 
 
     override fun onInitialize() {
@@ -33,80 +40,32 @@ class CloudFactoryMod : ModInitializer {
 
 
     fun onConfig() {
+        configCloudsBlocks()
 
+        CLOUD_GENERATOR_HANDLER = CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
 
-        val MOD_COLORS = listOf<String>(
-            "white",
-            "orange",
-            "magenta",
-            "light_blue",
-            "yellow",
-            "lime",
-            "pink",
-            "gray",
-            "light_gray",
-            "cyan",
-            "purple",
-            "blue",
-            "brown",
-            "green",
-            "red",
-            "black"
-        ).sortedBy {
-            it
-        }
-
-
-
-        GROUP_TAB = FabricItemGroupBuilder.build(
-            makeID("group_tab")
-        ) {
-            DEFAULT_TAB_GROUP_ITEM
-        }
-
-
-        MOD_COLORS.forEach { color ->
-
-            val blockName = "cloud_$color"
-            val cloudBLock = registerCloudBlockItem(color) ?: return@forEach
-            val item = registerBlockItem(blockName,cloudBLock )
-
-            if(color == "light_blue" ) {
-                DEFAULT_TAB_GROUP_ITEM = item?.defaultStack
-            }
-
-            CLOUD_BLOCKS.add(cloudBLock)
-        }
-    }
-
-    fun registerCloudBlockItem(color : String): Block? {
-
-        val blockName = "cloud_$color"
-
-        val cloudBLock = CloudBlock(
-            FabricBlockSettings.of(Material.POWDER_SNOW).strength(0.25f).sounds(BlockSoundGroup.SNOW)
-                .dynamicBounds()
-                .nonOpaque()
+        val CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
+            FabricBlockSettings.of(Material.METAL).requiresTool().strength(6f),
+            ::CloudGeneratorHandler
         )
 
-        return registerBlockWithoutBlockItem(blockName, cloudBLock)
-    }
+
+        FabricBlockEntityTypeBuilder.create(
+            { pos: BlockPos?, state: BlockState? ->
+                CloudGeneratorBlockEntity(pos, state)
+            }, CLOUD_GENERATOR_BLOCK
+        ).build(null).apply {
+            CLOUD_GENERATOR_TYPE = this
+        }
 
 
-    private fun registerBlockWithoutBlockItem(name: String, block: Block): Block? {
-        return Registry.register(Registry.BLOCK, Identifier(MOD_ID, name), block)
-    }
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, CLOUD_GENERATOR_ID, CLOUD_GENERATOR_TYPE)
 
-    private fun registerBlock(name: String, block: Block): Block? {
-        registerBlockItem(name, block)
-        return Registry.register(Registry.BLOCK, Identifier(MOD_ID, name), block)
-    }
+        Registry.register(Registry.BLOCK, CLOUD_GENERATOR_ID, CLOUD_GENERATOR_BLOCK)
 
-    private fun registerBlockItem(name: String, block: Block): Item? {
-        return Registry.register(
-            Registry.ITEM, Identifier(MOD_ID, name),
-            BlockItem(block, FabricItemSettings().group(GROUP_TAB))
-        )
+        val CLOUD_GENERATOR_ITEM =  BlockItem(CLOUD_GENERATOR_BLOCK, FabricItemSettings().group(MOD_GROUP))
+        Registry.register(Registry.ITEM, CLOUD_GENERATOR_ID, CLOUD_GENERATOR_ITEM)
+
     }
 
 
@@ -115,12 +74,17 @@ class CloudFactoryMod : ModInitializer {
         var CLOUD_BLOCKS = ArrayList<Block>()
 
         @JvmField
-        var GROUP_TAB: ItemGroup? = null
+        var CLOUD_GENERATOR_HANDLER: ScreenHandlerType<CloudGeneratorHandler>? = null
+
+        @JvmField
+        var CLOUD_GENERATOR_TYPE: BlockEntityType<CloudGeneratorBlockEntity>? = null
+
+
+        @JvmField
+        var MOD_GROUP: ItemGroup? = null
 
         @JvmField
         var DEFAULT_TAB_GROUP_ITEM: ItemStack? = null
-
-
 
 
         @JvmField
@@ -141,7 +105,7 @@ class CloudFactoryMod : ModInitializer {
     }
 }
 
-fun makeID(path: String?): Identifier? {
+fun makeID(path: String?): Identifier {
     return Identifier(MOD_ID, path)
 }
 

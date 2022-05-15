@@ -1,8 +1,8 @@
-package com.kenza.cloud.attributes
+package com.kenza.cloud.provider
 
 import net.minecraft.util.math.Vec3d
 
-interface EntityAttributes {
+interface EntityProvider {
     var cloudMovementMultiplier: Vec3d
     var test1: Boolean
 }

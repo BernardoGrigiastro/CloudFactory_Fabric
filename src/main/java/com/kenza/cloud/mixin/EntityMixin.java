@@ -1,11 +1,8 @@
 package com.kenza.cloud.mixin;
 
-import com.kenza.cloud.attributes.EntityAttributes;
-import com.kenza.cloud.attributes.LivingEntityAttributes;
-import net.minecraft.block.BlockState;
+import com.kenza.cloud.provider.EntityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,11 +12,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.kenza.cloud.utils.Java.convertInstanceOfObject;
-
 
 @Mixin(Entity.class)
-public abstract class EntityMixin implements EntityAttributes {
+public abstract class EntityMixin implements EntityProvider {
 
 
     private Vec3d cloudMovementMultiplier = Vec3d.ZERO;

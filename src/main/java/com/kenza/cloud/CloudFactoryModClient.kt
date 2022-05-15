@@ -1,8 +1,14 @@
 package com.kenza.cloud
 
 import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_BLOCKS
+import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_GENERATOR_TYPE
+import com.kenza.cloud.gui.factory.IRInventoryScreen
+import com.matthewperiut.chisel.block.BlockRegister
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry
+import net.minecraft.client.gui.screen.ingame.HandledScreens
 import net.minecraft.client.render.RenderLayer
 
 
@@ -27,10 +33,12 @@ import net.minecraft.client.render.RenderLayer
 class CloudFactoryModClient : ClientModInitializer {
     override fun onInitializeClient() {
 
-
+//        BlockEntityRendererRegistry.register(CLOUD_GENERATOR_TYPE) {
+//        }
         CLOUD_BLOCKS.map { block ->
             BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
         }
+        HandledScreens.register(CloudFactoryMod.CLOUD_GENERATOR_HANDLER) { controller, inv, _ -> IRInventoryScreen(controller, inv.player) }
 
     }
 }

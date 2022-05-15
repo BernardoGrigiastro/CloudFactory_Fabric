@@ -1,7 +1,7 @@
-package com.kenza.cloud
+package com.kenza.cloud.block.clouds
 
-import com.kenza.cloud.attributes.EntityAttributes
-import com.kenza.cloud.attributes.LivingEntityAttributes
+import com.kenza.cloud.provider.EntityProvider
+import com.kenza.cloud.provider.LivingEntityProvider
 import net.minecraft.block.BlockState
 import net.minecraft.block.EntityShapeContext
 import net.minecraft.block.PowderSnowBlock
@@ -10,22 +10,15 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.FallingBlockEntity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
-import net.minecraft.sound.SoundCategory
-import net.minecraft.util.Hand
-import net.minecraft.util.TypedActionResult
-import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
-import net.minecraft.world.BlockStateRaycastContext
 import net.minecraft.world.BlockView
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
-import net.minecraft.world.event.GameEvent
 
 class CloudBlock(settings: Settings?) : PowderSnowBlock(settings) {
 
@@ -35,13 +28,13 @@ class CloudBlock(settings: Settings?) : PowderSnowBlock(settings) {
 
 
             if (!canWalkOnPowderSnow(entity)) {
-                (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.6, 0.3, 0.6)
+                (entity as? EntityProvider)?.cloudMovementMultiplier = Vec3d(0.6, 0.3, 0.6)
             } else {
                 if (entity.isSneaking) {
-                    (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.9, 0.9, 0.9)
+                    (entity as? EntityProvider)?.cloudMovementMultiplier = Vec3d(0.9, 0.9, 0.9)
                 } else {
-                    (entity as? LivingEntityAttributes)?.levitationEnabled = true
-                    (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.6, 1.0, 0.6)
+                    (entity as? LivingEntityProvider)?.levitationEnabled = true
+                    (entity as? EntityProvider)?.cloudMovementMultiplier = Vec3d(0.6, 1.0, 0.6)
                 }
             }
 
@@ -63,7 +56,6 @@ class CloudBlock(settings: Settings?) : PowderSnowBlock(settings) {
                 }
             }
         }
-//        entity.setInPowderSnow(true)
         if (!world.isClient) {
             if (entity.isOnFire && (world.gameRules.getBoolean(GameRules.DO_MOB_GRIEFING) || entity is PlayerEntity) && entity.canModifyAt(
                     world,
