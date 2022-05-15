@@ -9,18 +9,23 @@ import net.minecraft.block.ShapeContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.FallingBlockEntity
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
+import net.minecraft.item.ItemStack
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.sound.SoundCategory
+import net.minecraft.util.Hand
+import net.minecraft.util.TypedActionResult
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
+import net.minecraft.world.BlockStateRaycastContext
 import net.minecraft.world.BlockView
 import net.minecraft.world.GameRules
 import net.minecraft.world.World
+import net.minecraft.world.event.GameEvent
 
 class CloudBlock(settings: Settings?) : PowderSnowBlock(settings) {
 
@@ -30,19 +35,13 @@ class CloudBlock(settings: Settings?) : PowderSnowBlock(settings) {
 
 
             if (!canWalkOnPowderSnow(entity)) {
-//                entity.slowMovement(state, Vec3d(0.9, 1.5, 0.9))
-                (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.6, 0.9, 0.6)
+                (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.6, 0.3, 0.6)
             } else {
-
                 if (entity.isSneaking) {
-//                    (entity as? EntityAttribute)?.cloudMovementMultiplier = Vec3d(0.9, 1.5, 0.9)
-//                    entity.slowMovement(state, Vec3d(0.9, 0.9, 0.9))
                     (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.9, 0.9, 0.9)
                 } else {
                     (entity as? LivingEntityAttributes)?.levitationEnabled = true
-
                     (entity as? EntityAttributes)?.cloudMovementMultiplier = Vec3d(0.6, 1.0, 0.6)
-
                 }
             }
 

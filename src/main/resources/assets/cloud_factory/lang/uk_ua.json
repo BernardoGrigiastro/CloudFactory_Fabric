@@ -1,0 +1,20 @@
+{
+  "block.cloud_factory.cloud_white": "Біла Хмара",
+  "block.cloud_factory.cloud_orange": "Помаранчева хмара",
+  "block.cloud_factory.cloud_magenta": "Пурпурна хмара",
+  "block.cloud_factory.cloud_light_blue": "Світло-блакитна хмара",
+  "block.cloud_factory.cloud_yellow": "Жовта Хмара",
+  "block.cloud_factory.cloud_lime": "Вапняна Хмара",
+  "block.cloud_factory.cloud_pink": "Рожева Хмара",
+  "block.cloud_factory.cloud_gray": "Сіра Хмара",
+  "block.cloud_factory.cloud_light_gray": "Світло-сіра хмара",
+  "block.cloud_factory.cloud_cyan": "Блакитна хмара",
+  "block.cloud_factory.cloud_purple": "Фіолетова хмара",
+  "block.cloud_factory.cloud_blue": "Блакитна Хмара",
+  "block.cloud_factory.cloud_brown": "Коричнева Хмара",
+  "block.cloud_factory.cloud_green": "Зелена Хмара",
+  "block.cloud_factory.cloud_red": "Червона Хмара",
+  "block.cloud_factory.cloud_black": "Чорна Хмара",
+
+  "itemGroup.cloud_factory.group_tab": "Хмарна фабрика"
+}

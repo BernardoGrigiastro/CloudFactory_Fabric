@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "EntityMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
   ],
   "client": [
-    "CameraMixin"
+    "CameraMixin",
+    "WorldRendererMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1

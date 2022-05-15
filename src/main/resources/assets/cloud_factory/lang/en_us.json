@@ -1,0 +1,24 @@
+{
+  "block.cloud_factory.cloud_white": "White Cloud",
+  "block.cloud_factory.cloud_orange": "Orange Cloud",
+  "block.cloud_factory.cloud_magenta": "Magenta Cloud",
+  "block.cloud_factory.cloud_light_blue": "Light Blue Cloud",
+  "block.cloud_factory.cloud_yellow": "Yellow Cloud",
+  "block.cloud_factory.cloud_lime": "Lime Cloud",
+  "block.cloud_factory.cloud_pink": "Pink Cloud",
+  "block.cloud_factory.cloud_gray": "Gray Cloud",
+  "block.cloud_factory.cloud_light_gray": "Light Gray Cloud",
+  "block.cloud_factory.cloud_cyan": "Cyan Cloud",
+  "block.cloud_factory.cloud_purple": "Purple Cloud",
+  "block.cloud_factory.cloud_blue": "Blue Cloud",
+  "block.cloud_factory.cloud_brown": "Brown Cloud",
+  "block.cloud_factory.cloud_green": "Green Cloud",
+  "block.cloud_factory.cloud_red": "Red Cloud",
+  "block.cloud_factory.cloud_black": "Black Cloud",
+
+
+  "itemGroup.cloud_factory.group_tab": "Cloud Factory"
+
+
+
+}
