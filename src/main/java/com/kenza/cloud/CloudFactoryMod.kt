@@ -6,6 +6,7 @@ import com.kenza.cloud.block.CloudGeneratorBlock
 import com.kenza.cloud.block.CloudGeneratorBlock.Companion.CLOUD_GENERATOR_ID
 import com.kenza.cloud.block.CloudGeneratorBlockEntity
 import com.kenza.cloud.block.CloudGeneratorHandler
+import com.kenza.cloud.item.Items.configCustomItems
 import com.kenza.cloud.utils.openLastWorldOnInit
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
@@ -41,6 +42,7 @@ class CloudFactoryMod : ModInitializer {
 
     fun onConfig() {
         configCloudsBlocks()
+        configCustomItems()
 
         CLOUD_GENERATOR_HANDLER = CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
 
