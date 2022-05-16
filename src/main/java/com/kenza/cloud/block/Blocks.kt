@@ -1,8 +1,8 @@
 package com.kenza.cloud.block
 
-import com.kenza.cloud.CloudBlockItem
 import com.kenza.cloud.CloudFactoryMod
 import com.kenza.cloud.block.clouds.CloudBlock
+import com.kenza.cloud.item.CloudBlockItem
 import com.kenza.cloud.makeID
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder

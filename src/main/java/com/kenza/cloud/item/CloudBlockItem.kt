@@ -1,4 +1,4 @@
-package com.kenza.cloud
+package com.kenza.cloud.item
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState

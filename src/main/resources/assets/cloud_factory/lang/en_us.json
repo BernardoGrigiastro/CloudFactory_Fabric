@@ -16,8 +16,10 @@
   "block.cloud_factory.cloud_red": "Red Cloud",
   "block.cloud_factory.cloud_black": "Black Cloud",
 
+  "block.cloud_factory.cloud_generator": "Cloud Generator",
 
   "itemGroup.cloud_factory.group_tab": "Cloud Factory"
+
 
 
 

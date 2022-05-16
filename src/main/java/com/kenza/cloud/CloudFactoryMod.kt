@@ -51,7 +51,7 @@ class CloudFactoryMod : ModInitializer {
 
 
         FabricBlockEntityTypeBuilder.create(
-            { pos: BlockPos?, state: BlockState? ->
+            { pos: BlockPos, state: BlockState ->
                 CloudGeneratorBlockEntity(pos, state)
             }, CLOUD_GENERATOR_BLOCK
         ).build(null).apply {

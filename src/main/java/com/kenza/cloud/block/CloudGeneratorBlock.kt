@@ -1,5 +1,6 @@
 package com.kenza.cloud.block
 
+import com.kenza.cloud.block.base.BaseBlockEntity
 import com.kenza.cloud.gui.factory.IRScreenHandlerFactory
 import com.kenza.cloud.makeID
 import net.minecraft.block.*
@@ -46,20 +47,18 @@ class CloudGeneratorBlock(
     }
 
 
-    override fun createBlockEntity(pos: BlockPos?, state: BlockState?): BlockEntity {
+    override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
         return CloudGeneratorBlockEntity(pos, state)
     }
 
 
-//    override fun <T : BlockEntity?> getTicker(
-//        world: World,
-//        state: BlockState?,
-//        type: BlockEntityType<T>?
-//    ): BlockEntityTicker<T>? {
-//
-//        return BlockEntityTicker { _, _, _, blockEntity -> (blockEntity as? DiscHolderBlockEntity)?.tick() }
-//
-//    }
+    override fun <T : BlockEntity?> getTicker(
+        world: World,
+        state: BlockState?,
+        type: BlockEntityType<T>?
+    ): BlockEntityTicker<T>? {
+        return BlockEntityTicker { _, _, _, blockEntity -> (blockEntity as? CloudGeneratorBlockEntity)?.tick() }
+    }
 
 //    @Suppress("DEPRECATION")
 //    override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
