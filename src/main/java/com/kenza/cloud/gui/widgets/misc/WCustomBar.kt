@@ -1,6 +1,8 @@
 //package com.kenza.cloud.gui.widgets.misc
 //
 import com.kenza.cloud.block.base.BaseBlockEntity
+import com.kenza.cloud.gui.Textures.RIGHT_PROCESS_EMPTY
+import com.kenza.cloud.gui.Textures.RIGHT_PROCESS_FULL
 import com.kenza.cloud.utils.identifier
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
@@ -164,8 +166,7 @@ fun fuelBar(blockEntity: BaseBlockEntity, index: Int): WCustomBar {
 //    return temp
 //}
 //
-val RIGHT_PROCESS_EMPTY = Texture(identifier("textures/gui/widget_cloud_processing_empty.png"))
-val RIGHT_PROCESS_FULL = Texture(identifier("textures/gui/widget_cloud_processing_full.png"))
+
 //
 //val LEFT_PROCESS_EMPTY = Texture(identifier("textures/gui/widget_processing_empty_left.png"))
 //val LEFT_PROCESS_FULL = Texture(identifier("textures/gui/widget_processing_full_left.png"))

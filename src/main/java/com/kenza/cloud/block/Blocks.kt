@@ -1,21 +1,30 @@
 package com.kenza.cloud.block
 
 import com.kenza.cloud.CloudFactoryMod
+import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_GENERATOR_HANDLER
 import com.kenza.cloud.block.clouds.CloudBlock
 import com.kenza.cloud.item.CloudBlockItem
 import com.kenza.cloud.makeID
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
+import net.minecraft.block.BlockState
 import net.minecraft.block.Material
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
 import net.minecraft.sound.BlockSoundGroup
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
+import registerScreenHandler
 
 object Blocks {
+
+    lateinit var CLOUD_GENERATOR_ITEM: BlockItem
+
+    var CLOUD_BLOCKS = ArrayList<Block>()
 
 
     val MOD_COLORS = listOf<String>(
@@ -41,6 +50,40 @@ object Blocks {
 
 
 
+    fun configsMachines(){
+        CLOUD_GENERATOR_HANDLER = CloudGeneratorBlock.CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
+
+        val CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
+            FabricBlockSettings.of(Material.METAL)
+                .requiresTool()
+                .luminance { state ->
+                    return@luminance if (state.get(CloudGeneratorBlock.ACTIVE)) 15 else 0
+                }
+                .strength(6f),
+            ::CloudGeneratorHandler
+        )
+
+
+        FabricBlockEntityTypeBuilder.create(
+            { pos: BlockPos, state: BlockState ->
+                CloudGeneratorBlockEntity(pos, state)
+            }, CLOUD_GENERATOR_BLOCK
+        ).build(null).apply {
+            CloudFactoryMod.CLOUD_GENERATOR_TYPE = this
+        }
+
+
+        Registry.register(Registry.BLOCK_ENTITY_TYPE,
+            CloudGeneratorBlock.CLOUD_GENERATOR_ID,
+            CloudFactoryMod.CLOUD_GENERATOR_TYPE
+        )
+
+        Registry.register(Registry.BLOCK, CloudGeneratorBlock.CLOUD_GENERATOR_ID, CLOUD_GENERATOR_BLOCK)
+
+        CLOUD_GENERATOR_ITEM =  BlockItem(CLOUD_GENERATOR_BLOCK, FabricItemSettings().group(CloudFactoryMod.MOD_GROUP))
+        Registry.register(Registry.ITEM, CloudGeneratorBlock.CLOUD_GENERATOR_ID, CLOUD_GENERATOR_ITEM)
+    }
+
 
     fun configCloudsBlocks(){
 
@@ -61,7 +104,7 @@ object Blocks {
                 CloudFactoryMod.DEFAULT_TAB_GROUP_ITEM = item?.defaultStack
             }
 
-            CloudFactoryMod.CLOUD_BLOCKS.add(cloudBLock)
+            CLOUD_BLOCKS.add(cloudBLock)
         }
 
     }

@@ -2,6 +2,7 @@ package com.kenza.cloud
 
 import com.kenza.cloud.CloudFactoryMod.Companion.MOD_ID
 import com.kenza.cloud.block.Blocks.configCloudsBlocks
+import com.kenza.cloud.block.Blocks.configsMachines
 import com.kenza.cloud.block.CloudGeneratorBlock
 import com.kenza.cloud.block.CloudGeneratorBlock.Companion.ACTIVE
 import com.kenza.cloud.block.CloudGeneratorBlock.Companion.CLOUD_GENERATOR_ID
@@ -33,7 +34,7 @@ class CloudFactoryMod : ModInitializer {
 
     //data get entity @music_disc_cleopona.json SelectedItem
     //give @p iron_pickaxe{Damage:10000} 20
-
+    //data get entity @s SelectedItem
 
     override fun onInitialize() {
 
@@ -47,42 +48,12 @@ class CloudFactoryMod : ModInitializer {
         configCloudsBlocks()
         configCustomItems()
         configRecipes()
-
-        CLOUD_GENERATOR_HANDLER = CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
-
-        val CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
-            FabricBlockSettings.of(Material.METAL)
-                .requiresTool()
-                .luminance { state ->
-                    return@luminance if (state.get(ACTIVE)) 15 else 0
-                }
-                .strength(6f),
-            ::CloudGeneratorHandler
-        )
-
-
-        FabricBlockEntityTypeBuilder.create(
-            { pos: BlockPos, state: BlockState ->
-                CloudGeneratorBlockEntity(pos, state)
-            }, CLOUD_GENERATOR_BLOCK
-        ).build(null).apply {
-            CLOUD_GENERATOR_TYPE = this
-        }
-
-
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, CLOUD_GENERATOR_ID, CLOUD_GENERATOR_TYPE)
-
-        Registry.register(Registry.BLOCK, CLOUD_GENERATOR_ID, CLOUD_GENERATOR_BLOCK)
-
-        val CLOUD_GENERATOR_ITEM =  BlockItem(CLOUD_GENERATOR_BLOCK, FabricItemSettings().group(MOD_GROUP))
-        Registry.register(Registry.ITEM, CLOUD_GENERATOR_ID, CLOUD_GENERATOR_ITEM)
-
+        configsMachines()
     }
 
 
     companion object {
 
-        var CLOUD_BLOCKS = ArrayList<Block>()
 
         @JvmField
         var CLOUD_GENERATOR_HANDLER: ScreenHandlerType<CloudGeneratorHandler>? = null

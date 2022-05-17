@@ -20,5 +20,8 @@
 
   "itemGroup.cloud_factory.group_tab": "Cloud Factory",
 
-  "gui.widget.process": "Progress: %s"
+  "gui.widget.process": "Progress: %s",
+
+
+  "rei.cloud_factory.category" : "Clouding Creating"
 }

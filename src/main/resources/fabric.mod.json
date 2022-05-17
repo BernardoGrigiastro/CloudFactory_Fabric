@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "discholder",
+  "id": "cloud_factory",
   "version": "${version}",
-  "name": "Kenza's Disc Holder and DJ",
+  "name": "Kenza's Cloud Factory",
   "description": "Add disc holders and Dj villager to the game.",
   "authors": [
     "DmitryKenza"
@@ -24,11 +24,19 @@
     "client": [
       "com.kenza.cloud.CloudFactoryModClient"
     ],
+    "rei": [
+      {
+        "adapter": "kotlin",
+        "value": "com.kenza.cloud.recipe.rei.REIPlugin"
+      }
+    ],
+
     "modmenu": []
   },
   "mixins": [
     "cloud_factory.mixins.json"
   ],
+  "accessWidener": "cloud_factory.accesswidener",
   "depends": {
     "fabricloader": ">=0.12.0",
     "java": ">=16",

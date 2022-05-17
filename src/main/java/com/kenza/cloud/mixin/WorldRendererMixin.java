@@ -2,6 +2,7 @@ package com.kenza.cloud.mixin;
 
 
 import com.kenza.cloud.CloudFactoryMod;
+import com.kenza.cloud.block.clouds.CloudBlock;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
@@ -56,7 +57,7 @@ public class WorldRendererMixin {
         ItemStack item = this.client.player.getMainHandStack();
 
         if (this.client.crosshairTarget != null && this.client.crosshairTarget instanceof BlockHitResult) {
-            if ((item == null || item.getItem() instanceof BlockItem) && CloudFactoryMod.Companion.getCLOUD_BLOCKS().contains( ((BlockItem) item.getItem()).getBlock())) {
+            if ((item == null || item.getItem() instanceof BlockItem) && ( ((BlockItem) item.getItem()).getBlock() instanceof CloudBlock)) {
                 poseStack.push();
                 BlockHitResult bnr = (BlockHitResult) this.client.crosshairTarget;
                 if (this.client.world.getBlockState(bnr.getBlockPos()).isAir()) {

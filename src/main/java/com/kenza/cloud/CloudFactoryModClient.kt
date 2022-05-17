@@ -1,7 +1,7 @@
 package com.kenza.cloud
 
-import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_BLOCKS
 import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_GENERATOR_TYPE
+import com.kenza.cloud.block.Blocks.CLOUD_BLOCKS
 import com.kenza.cloud.gui.factory.IRInventoryScreen
 import com.matthewperiut.chisel.block.BlockRegister
 import net.fabricmc.api.ClientModInitializer

@@ -45,7 +45,10 @@ class CloudCreatingRecipe (val valueId: Identifier,val  valueOutput: ItemStack, 
         companion object {
             val INSTANCE: Type = Type()
         }
+
     }
+
+
 
     class Serializer : RecipeSerializer<CloudCreatingRecipe> {
         // this is the name given in the json file

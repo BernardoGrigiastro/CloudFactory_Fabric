@@ -2,7 +2,7 @@
   "type": "cloud_factory:cloud_creating",
   "ingredients": [
     {
-      "item": "cloud_factory:cloud_white"
+      "item": "minecraft:snowball"
     }
   ],
   "output": {
