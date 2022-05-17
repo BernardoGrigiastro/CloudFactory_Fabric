@@ -6,6 +6,7 @@ import com.kenza.cloud.block.base.BaseBlockEntity
 import com.kenza.cloud.gui.IRGuiScreenHandler
 import com.kenza.cloud.gui.add
 import com.kenza.cloud.gui.configure
+import com.kenza.cloud.item.AlumentumItem
 import com.kenza.cloud.utils.identifier
 import fuelBar
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription
@@ -50,14 +51,14 @@ class CloudGeneratorHandler(syncId: Int, playerInventory: PlayerInventory, ctx: 
         setRootPanel(root)
         configure("block.cloud_factory.cloud_generator", ctx, playerInventory, blockInventory)
 
-        val inputSlot = WItemSlot.of(blockInventory, 2)
+        val inputSlot = WItemSlot.of(blockInventory, 0)
         root.add(inputSlot, 3.3, 1.8)
 
 
         val processWidget = query<CloudGeneratorBlockEntity, WCustomBar> { be -> processBar(be, CRAFTING_COMPONENT_ID) }
         root.add(processWidget, 4.5, 1.7)
 
-        val outputSlot = WItemSlot.outputOf(blockInventory, 3)
+        val outputSlot = WItemSlot.outputOf(blockInventory, 1)
         outputSlot.addChangeListener { _, _, _, _ ->
             val player = playerInventory.player
             if (!player.world.isClient) {
@@ -72,7 +73,9 @@ class CloudGeneratorHandler(syncId: Int, playerInventory: PlayerInventory, ctx: 
 
 
 
-        val fuelSlot = WItemSlot.of(blockInventory, 4)
+        val fuelSlot = WItemSlot.of(blockInventory, 2).setFilter {
+            it.item is AlumentumItem
+        }
         root.add(fuelSlot, .3, 1.8)
 
 

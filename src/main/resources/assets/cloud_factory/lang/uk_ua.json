@@ -19,5 +19,7 @@
 
   "block.cloud_factory.cloud_generator": "Генератор хмар",
 
-  "itemGroup.cloud_factory.group_tab": "Хмарна фабрика"
+  "itemGroup.cloud_factory.group_tab": "Хмарна фабрика",
+
+  "gui.widget.process": "Прогрес: %s"
 }

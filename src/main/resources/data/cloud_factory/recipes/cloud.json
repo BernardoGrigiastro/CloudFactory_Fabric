@@ -1,0 +1,11 @@
+{
+  "type": "cloud_factory:cloud_creating",
+  "ingredients": [
+    {
+      "item": "cloud_factory:cloud_white"
+    }
+  ],
+  "output": {
+    "item": "cloud_factory:cloud_white"
+  }
+}

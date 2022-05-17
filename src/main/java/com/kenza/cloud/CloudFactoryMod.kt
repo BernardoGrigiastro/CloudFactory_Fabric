@@ -3,10 +3,12 @@ package com.kenza.cloud
 import com.kenza.cloud.CloudFactoryMod.Companion.MOD_ID
 import com.kenza.cloud.block.Blocks.configCloudsBlocks
 import com.kenza.cloud.block.CloudGeneratorBlock
+import com.kenza.cloud.block.CloudGeneratorBlock.Companion.ACTIVE
 import com.kenza.cloud.block.CloudGeneratorBlock.Companion.CLOUD_GENERATOR_ID
 import com.kenza.cloud.block.CloudGeneratorBlockEntity
 import com.kenza.cloud.block.CloudGeneratorHandler
 import com.kenza.cloud.item.Items.configCustomItems
+import com.kenza.cloud.recipe.Recipes.configRecipes
 import com.kenza.cloud.utils.openLastWorldOnInit
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
@@ -41,13 +43,20 @@ class CloudFactoryMod : ModInitializer {
 
 
     fun onConfig() {
+
         configCloudsBlocks()
         configCustomItems()
+        configRecipes()
 
         CLOUD_GENERATOR_HANDLER = CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
 
         val CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
-            FabricBlockSettings.of(Material.METAL).requiresTool().strength(6f),
+            FabricBlockSettings.of(Material.METAL)
+                .requiresTool()
+                .luminance { state ->
+                    return@luminance if (state.get(ACTIVE)) 15 else 0
+                }
+                .strength(6f),
             ::CloudGeneratorHandler
         )
 

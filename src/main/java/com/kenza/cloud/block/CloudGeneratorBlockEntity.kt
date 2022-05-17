@@ -11,6 +11,7 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.inventory.Inventories
+import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
@@ -21,22 +22,24 @@ import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
+import java.util.*
 
 class CloudGeneratorBlockEntity (pos: BlockPos, state: BlockState) :
     BaseBlockEntity(CloudFactoryMod.CLOUD_GENERATOR_TYPE, pos, state),
     ImplementedInventory,
     NamedScreenHandlerFactory {
 
-    override val guiSyncableComponent: GuiSyncableComponent = GuiSyncableComponent()
+    override var guiSyncableComponent: GuiSyncableComponent = GuiSyncableComponent()
 
 
-    var craftingComponent: CraftingComponent = CraftingComponent()
+    private val INVENTORY_SIZE = 3;
 
-
-    private val INVENTORY_SIZE = 8;
-
-    private var inventoriesItems: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
+    var inventoriesItems: DefaultedList<ItemStack> = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY)
     private var inventoryTouched = true
+
+
+    var craftingComponent: CraftingComponent = CraftingComponent(this)
 
 
     init {
@@ -91,8 +94,10 @@ class CloudGeneratorBlockEntity (pos: BlockPos, state: BlockState) :
     }
 
 
-    fun tick() {
-        craftingComponent.tick()
+
+
+    fun tick(world: World, blockPos: BlockPos, blockState: BlockState) {
+        craftingComponent.tick(world, blockPos, blockState)
     }
 
 }

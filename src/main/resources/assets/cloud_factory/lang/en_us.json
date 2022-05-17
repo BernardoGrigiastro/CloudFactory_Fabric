@@ -18,9 +18,7 @@
 
   "block.cloud_factory.cloud_generator": "Cloud Generator",
 
-  "itemGroup.cloud_factory.group_tab": "Cloud Factory"
+  "itemGroup.cloud_factory.group_tab": "Cloud Factory",
 
-
-
-
+  "gui.widget.process": "Progress: %s"
 }
