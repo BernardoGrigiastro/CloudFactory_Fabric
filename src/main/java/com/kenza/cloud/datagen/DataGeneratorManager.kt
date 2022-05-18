@@ -1,19 +1,11 @@
 package com.kenza.cloud.datagen
 
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.kenza.cloud.CloudFactoryMod.Companion.LOGGER
-import com.kenza.cloud.block.clouds.CloudBlock
 import com.kenza.cloud.datagen.base.ImageFactory
 import com.kenza.cloud.datagen.base.JsonFactory
-import com.kenza.cloud.datagen.generators.BlockGenerator
+import com.kenza.cloud.datagen.generators.*
 import com.kenza.cloud.datagen.old.*
-import com.kenza.cloud.datagen.generators.PattersFactory
-import com.kenza.cloud.datagen.generators.SlabBlockGenerator
-import com.kenza.cloud.datagen.generators.StairsBlockGenerator
 import net.minecraft.util.DyeColor
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -21,6 +13,7 @@ class DataGeneratorManager(namespace: String) {
 
     val rootAssests = File("../src/main/generated/assets/cloud_factory")
     val rootData = File("../src/main/generated/data/cloud_factory")
+
 
     val lootTableGenerator = LootTableGenerator(rootData, namespace, LootTableGenerator.SELF_DROP)
     val itemModelGenerator = ItemModelGenerator(rootAssests, namespace, ItemModelGenerator.DEFAULT_ITEM)
@@ -32,6 +25,9 @@ class DataGeneratorManager(namespace: String) {
     val stairsBlockGenerator = StairsBlockGenerator(rootAssests, rootData, namespace, PattersFactory.nullFactory())
     val slabBlockGenerator = SlabBlockGenerator(rootAssests, rootData, namespace, PattersFactory.nullFactory())
     val blockGenerator = BlockGenerator(rootAssests, rootData, namespace, PattersFactory.nullFactory())
+    val wallBlockGenerator = WallBlockGenerator(rootAssests, rootData, namespace, PattersFactory.nullFactory())
+    val fenceBlockGenerator = FenceBlockGenerator(rootAssests, rootData, namespace, PattersFactory.nullFactory())
+    val gateBlockGenerator = GateBlockGenerator(rootAssests, rootData, namespace, PattersFactory.nullFactory())
 
     init {
         rootAssests.mkdir()
@@ -43,6 +39,9 @@ class DataGeneratorManager(namespace: String) {
             stairsBlockGenerator.register("cloud_$color")
             slabBlockGenerator.register("cloud_$color")
             blockGenerator.register("cloud_$color")
+            wallBlockGenerator.register("cloud_$color")
+            fenceBlockGenerator.register("cloud_$color")
+            gateBlockGenerator.register("cloud_$color")
         }
 
 
@@ -136,8 +135,8 @@ class DataGeneratorManager(namespace: String) {
     }
 
     fun generate() {
-        val lootTablesGenerated = lootTableGenerator.generate()
-        LOGGER.info("Generated $lootTablesGenerated loot tables.")
+//        val lootTablesGenerated = lootTableGenerator.generate()
+//        LOGGER.info("Generated $lootTablesGenerated loot tables.")
         val itemModelsGenerated = itemModelGenerator.generate()
         LOGGER.info("Generated $itemModelsGenerated item models.")
         val blockModelsGenerated = blockModelGenerator.generate()
@@ -149,13 +148,16 @@ class DataGeneratorManager(namespace: String) {
         val spritesGenerated = metalSpriteGenerator.generate()
         LOGGER.info("Generated $spritesGenerated sprites.")
 
-        val stairsGenerated = stairsBlockGenerator.generate()
-        val stairsGenerated2 = slabBlockGenerator.generate()
-        val stairsGenerated3 = blockGenerator.generate()
+        val x1 = stairsBlockGenerator.generate()
+        val x2 = slabBlockGenerator.generate()
+        val x3 = blockGenerator.generate()
+        val x4 = wallBlockGenerator.generate()
+        val x5 = fenceBlockGenerator.generate()
+        val x6 = gateBlockGenerator.generate()
 
-        LOGGER.info("Generated $stairsGenerated  stairs.")
-        LOGGER.info("Generated $stairsGenerated2 slabs.")
-        LOGGER.info("Generated $stairsGenerated3 blocks.")
+//        LOGGER.info("Generated $x1  stairs.")
+//        LOGGER.info("Generated $x2 slabs.")
+//        LOGGER.info("Generated $x3 blocks.")
 
 //        LOGGER.info("Generated ${lootTablesGenerated + itemModelsGenerated + blockModelsGenerated + recipesGenerated + tagsGenerated + spritesGenerated } files in total.")
         exitProcess(0)

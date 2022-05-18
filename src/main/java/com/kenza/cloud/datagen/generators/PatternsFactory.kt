@@ -7,6 +7,15 @@ object PatternsFactory {
 
     val patternsDir = File("../src/main/patterns")
 
+    val rootAssests = File("../src/main/generated/assets/cloud_factory")
+    val rootData = File("../src/main/generated/data/cloud_factory")
+
+
+    val blockstatesOutput = File(rootAssests, "blockstates")
+    val loottablesOutput = File(rootData, "loot_tables/blocks")
+    val recipesOutput = File(rootData, "recipes")
+    val modelItemsOutput = File(rootAssests, "models/item")
+
 
     val MODELS_BLOCKS_PART: (String, String, String) -> PattersFactory<String> = { material, namespace, postfix ->
 
@@ -21,6 +30,24 @@ object PatternsFactory {
             }
         }
     }
+
+    val MODELS_ITEMS_PART: (String, String, String) -> PattersFactory<String> = { material, namespace, postfix ->
+
+        object : PattersFactory<String>() {
+            override fun generate(): String {
+                val scheme = File(patternsDir, "models.item.${postfix}.txt").readText()
+                val result = scheme
+                    .replace("%1", material)
+                    .replace("%2", namespace)
+
+                return result
+            }
+
+            override fun getOutputDir(): File = modelItemsOutput
+        }
+
+    }
+
 
     val BLOCKSTATES_PART: (String, String, String, File) -> PattersFactory<String> =
         { material, namespace, postfix, outputDir ->
@@ -76,4 +103,7 @@ object PatternsFactory {
 
             }
         }
+
+
+    val DEFAULT_POSTFIX = "default"
 }

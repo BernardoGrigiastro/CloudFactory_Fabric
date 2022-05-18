@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "cloud_factory:cloud_pink_wall",
+    "cloud_factory:cloud_brown_wall",
+    "cloud_factory:cloud_white_wall",
+    "cloud_factory:cloud_gray_wall",
+    "cloud_factory:cloud_orange_wall",
+    "cloud_factory:cloud_red_wall",
+    "cloud_factory:cloud_light_blue_wall",
+    "cloud_factory:cloud_light_gray_wall",
+    "cloud_factory:cloud_blue_wall",
+    "cloud_factory:cloud_yellow_wall",
+    "cloud_factory:cloud_lime_wall",
+    "cloud_factory:cloud_black_wall",
+    "cloud_factory:cloud_green_wall",
+    "cloud_factory:cloud_cyan_wall",
+    "cloud_factory:cloud_purple_wall",
+    "cloud_factory:cloud_magenta_wall"
+  ]
+}

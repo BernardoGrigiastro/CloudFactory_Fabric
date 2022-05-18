@@ -2,9 +2,7 @@ package com.kenza.cloud.block
 
 import com.kenza.cloud.CloudFactoryMod
 import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_GENERATOR_HANDLER
-import com.kenza.cloud.block.clouds.CloudBlock
-import com.kenza.cloud.block.clouds.CloudSlab
-import com.kenza.cloud.block.clouds.CloudStairs
+import com.kenza.cloud.block.clouds.*
 import com.kenza.cloud.item.CloudBlockItem
 import com.kenza.cloud.makeID
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
@@ -33,6 +31,12 @@ object Blocks {
     var CLOUD_STAIRS_BLOCKS = ArrayList<Block>()
 
     var CLOUD_SLAB_BLOCKS = ArrayList<Block>()
+
+    var CLOUD_WALL_BLOCKS = ArrayList<Block>()
+
+    var CLOUD_FENCE_BLOCKS = ArrayList<Block>()
+
+    var CLOUD_GATE_BLOCKS = ArrayList<Block>()
 
 
     val MOD_COLORS = listOf<String>(
@@ -132,6 +136,57 @@ object Blocks {
 
         MOD_COLORS.forEach { color ->
             registerCloudSlabItem(color)
+        }
+
+        MOD_COLORS.forEach { color ->
+            registerCloudWallItem(color)
+        }
+
+        MOD_COLORS.forEach { color ->
+            registerCloudFenceItem(color)
+        }
+
+        MOD_COLORS.forEach { color ->
+            registerCloudGateItem(color)
+        }
+    }
+
+
+    private fun registerCloudGateItem(color: String): Block? {
+        val blockName = "cloud_${color}_fence_gate"
+
+        val cloudBLock = CloudGate(
+            fabricSettings
+        )
+
+        return registerBlock(blockName, cloudBLock)?.apply {
+            CLOUD_GATE_BLOCKS.add(this)
+        }
+    }
+
+
+    private fun registerCloudFenceItem(color: String): Block? {
+        val blockName = "cloud_${color}_fence"
+
+        val cloudBLock = CloudFence(
+            fabricSettings
+        )
+
+        return registerBlock(blockName, cloudBLock)?.apply {
+            CLOUD_FENCE_BLOCKS.add(this)
+        }
+    }
+
+
+    private fun registerCloudWallItem(color: String): Block? {
+        val blockName = "cloud_${color}_wall"
+
+        val cloudBLock = CloudWall(
+            fabricSettings
+        )
+
+        return registerBlock(blockName, cloudBLock)?.apply {
+            CLOUD_WALL_BLOCKS.add(this)
         }
     }
 

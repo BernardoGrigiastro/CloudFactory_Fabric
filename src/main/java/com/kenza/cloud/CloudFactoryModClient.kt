@@ -1,9 +1,12 @@
 package com.kenza.cloud
 
 import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_GENERATOR_TYPE
+import com.kenza.cloud.block.Blocks
 import com.kenza.cloud.block.Blocks.CLOUD_BLOCKS
+import com.kenza.cloud.block.Blocks.CLOUD_FENCE_BLOCKS
 import com.kenza.cloud.block.Blocks.CLOUD_SLAB_BLOCKS
 import com.kenza.cloud.block.Blocks.CLOUD_STAIRS_BLOCKS
+import com.kenza.cloud.block.Blocks.CLOUD_WALL_BLOCKS
 import com.kenza.cloud.gui.factory.IRInventoryScreen
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap
@@ -36,16 +39,28 @@ class CloudFactoryModClient : ClientModInitializer {
 
 //        BlockEntityRendererRegistry.register(CLOUD_GENERATOR_TYPE) {
 //        }
-        CLOUD_BLOCKS.map { block ->
-            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
+
+        (CLOUD_BLOCKS + CLOUD_STAIRS_BLOCKS + CLOUD_SLAB_BLOCKS + CLOUD_WALL_BLOCKS
+                + CLOUD_FENCE_BLOCKS + Blocks.CLOUD_GATE_BLOCKS).forEach { block ->
+                BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
         }
-        CLOUD_STAIRS_BLOCKS.map { block ->
-            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
-        }
+
 //
-        CLOUD_SLAB_BLOCKS.map { block ->
-            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
-        }
+//        CLOUD_BLOCKS.map { block ->
+//            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
+//        }
+//        CLOUD_STAIRS_BLOCKS.map { block ->
+//            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
+//        }
+////
+//        CLOUD_SLAB_BLOCKS.map { block ->
+//        }
+//
+//        CLOUD_WALL_BLOCKS.map { block ->
+//            BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent())
+//        }
+
+//        Blocks.CLOUD_FENCE_BLOCKS
 
         HandledScreens.register(CloudFactoryMod.CLOUD_GENERATOR_HANDLER) { controller, inv, _ -> IRInventoryScreen(controller, inv.player) }
 

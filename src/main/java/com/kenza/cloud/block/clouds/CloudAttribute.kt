@@ -26,8 +26,18 @@ interface CloudAttribute {
     val collidable: Boolean
 
     fun isSideInvisible(state: BlockState, stateFrom: BlockState, direction: Direction): Boolean {
+
+
+
         (stateFrom.block as? CloudAttribute)?.let {
-//            val x =  stateFrom.block
+
+            if (state.block is CloudFence || state.block is CloudWall || state.block is CloudGate  ) {
+                return false
+            }
+
+            if (stateFrom.block is CloudFence || stateFrom.block is CloudWall || stateFrom.block is CloudGate  ) {
+                return false
+            }
 
 
             if (state.block is CloudStairs) {

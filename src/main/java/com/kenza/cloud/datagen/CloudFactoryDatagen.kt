@@ -1,8 +1,7 @@
 package com.kenza.cloud.datagen
 
 import com.kenza.cloud.CloudFactoryMod.Companion.MOD_ID
-import com.kenza.cloud.block.clouds.CloudAttribute
-import com.kenza.cloud.block.clouds.CloudBlock
+import com.kenza.cloud.block.clouds.*
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
@@ -32,6 +31,18 @@ class CloudFactoryDatagen : DataGeneratorEntrypoint {
 
                     if (block is CloudAttribute) {
                         getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(block)
+                    }
+
+                    if (block is CloudWall) {
+                        getOrCreateTagBuilder(BlockTags.WALLS).add(block)
+                    }
+
+                    if (block is CloudFence) {
+                        getOrCreateTagBuilder(BlockTags.FENCES).add(block)
+                    }
+
+                    if (block is CloudGate) {
+                        getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(block)
                     }
                 }
             }

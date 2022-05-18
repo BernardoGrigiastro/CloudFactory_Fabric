@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "cloud_factory:block/cloud_light_blue"
+  }
+}

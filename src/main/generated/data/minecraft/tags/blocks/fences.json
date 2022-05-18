@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "cloud_factory:cloud_purple_fence",
+    "cloud_factory:cloud_orange_fence",
+    "cloud_factory:cloud_white_fence",
+    "cloud_factory:cloud_lime_fence",
+    "cloud_factory:cloud_light_gray_fence",
+    "cloud_factory:cloud_black_fence",
+    "cloud_factory:cloud_light_blue_fence",
+    "cloud_factory:cloud_yellow_fence",
+    "cloud_factory:cloud_red_fence",
+    "cloud_factory:cloud_green_fence",
+    "cloud_factory:cloud_brown_fence",
+    "cloud_factory:cloud_cyan_fence",
+    "cloud_factory:cloud_gray_fence",
+    "cloud_factory:cloud_magenta_fence",
+    "cloud_factory:cloud_pink_fence",
+    "cloud_factory:cloud_blue_fence"
+  ]
+}
