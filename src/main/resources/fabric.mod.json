@@ -30,6 +30,12 @@
         "value": "com.kenza.cloud.recipe.rei.REIPlugin"
       }
     ],
+    "fabric-datagen": [
+      {
+        "adapter": "kotlin",
+        "value": "com.kenza.cloud.datagen.CloudFactoryDatagen"
+      }
+    ],
 
     "modmenu": []
   },

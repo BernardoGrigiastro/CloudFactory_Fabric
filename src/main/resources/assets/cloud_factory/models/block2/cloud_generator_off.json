@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+	"textures": {
+		"north": "cloud_factory:block/machines_cloud_off",
+		"east": "cloud_factory:block/machines_cloud_side",
+		"south": "cloud_factory:block/machines_cloud_side",
+		"west": "cloud_factory:block/machines_cloud_side",
+		"up": "cloud_factory:block/machines_cloud_top",
+		"down": "cloud_factory:block/machines_cloud_side",
+		"particle": "cloud_factory:block/machines_cloud_side"
+	}
+}

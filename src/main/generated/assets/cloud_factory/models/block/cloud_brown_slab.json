@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "cloud_factory:block/cloud_brown",
+    "top": "cloud_factory:block/cloud_brown",
+    "side": "cloud_factory:block/cloud_brown"
+  }
+}

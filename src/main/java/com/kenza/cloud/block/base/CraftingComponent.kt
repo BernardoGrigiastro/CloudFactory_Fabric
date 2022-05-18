@@ -36,7 +36,6 @@ class CraftingComponent(val entity: CloudGeneratorBlockEntity) :
 
         if (isConsumingFuel()) {
             fuelTime--
-            fuelTime -= 10
         }
 
         if (hasRecipe()) {

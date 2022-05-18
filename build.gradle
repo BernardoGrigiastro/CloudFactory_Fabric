@@ -113,10 +113,33 @@ jar {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
 }
-loom {
-	accessWidenerPath = file("src/main/resources/cloud_factory.accesswidener")
+
+sourceSets {
+	main{
+		resources {
+			srcDirs += [
+					'src/main/generated'
+			]
+		}
+	}
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/cloud_factory.accesswidener")
+
+	runs {
+		datagen {
+			server()
+
+			name "Minecraft Data"
+			vmArg "-Dfabric-api.datagen"
+			vmArg "-Dfabric-api.datagen.output-dir=src/main/generated"
+
+			runDir "build/datagen"
+		}
+	}
+
+}
 
 // configure the maven publication
 publishing {

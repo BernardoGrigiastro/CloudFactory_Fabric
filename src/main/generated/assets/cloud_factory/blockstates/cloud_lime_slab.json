@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "cloud_factory:block/cloud_lime_slab"
+    },
+    "type=double": {
+      "model": "cloud_factory:block/cloud_lime_block"
+    },
+    "type=top": {
+      "model": "cloud_factory:block/cloud_lime_slab_top"
+    }
+  }
+}

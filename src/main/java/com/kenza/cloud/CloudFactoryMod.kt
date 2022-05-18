@@ -8,13 +8,17 @@ import com.kenza.cloud.block.CloudGeneratorBlock.Companion.ACTIVE
 import com.kenza.cloud.block.CloudGeneratorBlock.Companion.CLOUD_GENERATOR_ID
 import com.kenza.cloud.block.CloudGeneratorBlockEntity
 import com.kenza.cloud.block.CloudGeneratorHandler
+import com.kenza.cloud.datagen.DataGeneratorManager
 import com.kenza.cloud.item.Items.configCustomItems
 import com.kenza.cloud.recipe.Recipes.configRecipes
 import com.kenza.cloud.utils.openLastWorldOnInit
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.fabricmc.fabric.impl.datagen.FabricDataGenHelper
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Material
@@ -40,12 +44,22 @@ class CloudFactoryMod : ModInitializer {
 
         onConfig()
         openLastWorldOnInit()
+
+
+        if (FabricLoader.getInstance().getLaunchArguments(true).contains("-dataGen")) {
+            FabricDataGenHelper.run()
+            ClientLifecycleEvents.CLIENT_STARTED.register(ClientLifecycleEvents.ClientStarted {
+                DataGeneratorManager(MOD_ID).generate()
+            })
+        }
+
     }
 
 
     fun onConfig() {
 
         configCloudsBlocks()
+
         configCustomItems()
         configRecipes()
         configsMachines()

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "%2:block/%1_block"
+    }
+  }
+}

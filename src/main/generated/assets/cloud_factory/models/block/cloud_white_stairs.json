@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "cloud_factory:block/cloud_white",
+    "top": "cloud_factory:block/cloud_white",
+    "side": "cloud_factory:block/cloud_white"
+  }
+}

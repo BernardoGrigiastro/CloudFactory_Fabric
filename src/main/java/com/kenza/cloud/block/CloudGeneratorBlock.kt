@@ -80,7 +80,7 @@ class CloudGeneratorBlock(
         val j = random.nextDouble() * 6.0 / 16.0
         val k = if (axis === Direction.Axis.Z) direction.offsetZ.toDouble() * 0.52 else h
         world.addParticle(ParticleTypes.SMOKE, d + i, e + j, f + k, 0.0, 0.0, 0.0)
-        world.addParticle(ParticleTypes.FLAME, d + i, e + j, f + k, 0.0, 0.0, 0.0)
+        world.addParticle(ParticleTypes.SNOWFLAKE, d + i, e + j, f + k, 0.0, 0.0, 0.0)
     }
 
     @Suppress("DEPRECATION")

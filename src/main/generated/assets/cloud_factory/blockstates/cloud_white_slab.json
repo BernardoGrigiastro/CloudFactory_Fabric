@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "cloud_factory:block/cloud_white_slab"
+    },
+    "type=double": {
+      "model": "cloud_factory:block/cloud_white_block"
+    },
+    "type=top": {
+      "model": "cloud_factory:block/cloud_white_slab_top"
+    }
+  }
+}

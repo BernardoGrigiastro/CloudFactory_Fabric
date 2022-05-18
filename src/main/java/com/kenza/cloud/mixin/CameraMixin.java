@@ -2,7 +2,9 @@ package com.kenza.cloud.mixin;
 
 import com.kenza.cloud.CloudFactoryMod;
 import com.kenza.cloud.block.Blocks;
+import com.kenza.cloud.block.clouds.CloudAttribute;
 import com.kenza.cloud.block.clouds.CloudBlock;
+import com.kenza.cloud.block.clouds.CloudStairs;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.CameraSubmersionType;
@@ -35,7 +37,7 @@ public class CameraMixin {
             return;
         }
 
-        if(state.getBlock() instanceof CloudBlock){
+        if(state.getBlock() instanceof CloudAttribute){
             cir.setReturnValue(CameraSubmersionType.POWDER_SNOW);
             blockState.clear();
         }

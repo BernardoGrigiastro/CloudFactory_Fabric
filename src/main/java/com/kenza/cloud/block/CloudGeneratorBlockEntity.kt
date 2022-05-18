@@ -6,6 +6,7 @@ import com.kenza.cloud.block.CloudGeneratorHandler.Companion.CRAFTING_COMPONENT_
 import com.kenza.cloud.block.base.BaseBlockEntity
 import com.kenza.cloud.block.base.GuiSyncableComponent
 import com.kenza.cloud.block.base.trackObject
+import com.kenza.cloud.item.AlumentumItem
 import com.kenza.cloud.utils.ImplementedInventory
 import net.minecraft.block.BlockState
 import net.minecraft.entity.player.PlayerEntity
@@ -22,6 +23,7 @@ import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.world.World
 import java.util.*
 
@@ -41,6 +43,46 @@ class CloudGeneratorBlockEntity (pos: BlockPos, state: BlockState) :
 
     var craftingComponent: CraftingComponent = CraftingComponent(this)
 
+
+    override fun setStack(slot: Int, stack: ItemStack?) {
+
+        super.setStack(slot, stack)
+        markDirty()
+    }
+
+    override fun removeStack(slot: Int): ItemStack {
+        markDirty()
+        return super.removeStack(slot)
+    }
+
+    override fun canInsert(slot: Int, stack: ItemStack?, side: Direction?): Boolean {
+
+        val canInsert = when(side){
+            Direction.UP ->  {
+                slot == 0
+            }
+            Direction.DOWN , Direction.NORTH , Direction.SOUTH , Direction.WEST, Direction.EAST -> {
+                slot == 2 && stack?.item is AlumentumItem
+            }
+            else -> false
+        }
+
+        return canInsert
+    }
+
+
+
+    override fun canExtract(slot: Int, stack: ItemStack?, side: Direction?): Boolean {
+
+        val canExtract = when(side){
+            Direction.DOWN ->  {
+                slot == 1
+            }
+            else -> false
+        }
+
+        return canExtract
+    }
 
     init {
         trackObject(CRAFTING_COMPONENT_ID, craftingComponent)

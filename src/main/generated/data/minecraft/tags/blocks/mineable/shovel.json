@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "cloud_factory:cloud_red_block",
+    "cloud_factory:cloud_black_block",
+    "cloud_factory:cloud_cyan_block",
+    "cloud_factory:cloud_gray_block",
+    "cloud_factory:cloud_magenta_block",
+    "cloud_factory:cloud_pink_block",
+    "cloud_factory:cloud_orange_block",
+    "cloud_factory:cloud_lime_block",
+    "cloud_factory:cloud_blue_block",
+    "cloud_factory:cloud_white_block",
+    "cloud_factory:cloud_purple_block",
+    "cloud_factory:cloud_light_gray_block",
+    "cloud_factory:cloud_light_blue_block",
+    "cloud_factory:cloud_brown_block",
+    "cloud_factory:cloud_green_block",
+    "cloud_factory:cloud_yellow_block"
+  ]
+}

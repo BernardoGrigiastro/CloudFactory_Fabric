@@ -1,9 +1,11 @@
 package com.kenza.cloud.mixin;
 
 
-import com.kenza.cloud.CloudFactoryMod;
+import com.kenza.cloud.block.clouds.CloudAttribute;
 import com.kenza.cloud.block.clouds.CloudBlock;
+import com.kenza.cloud.block.clouds.CloudStairs;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,7 +22,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static com.kenza.cloud.CloudFactoryMod.MOD_ID;
-import static com.kenza.cloud.CloudFactoryMod.debug;
 
 
 @Mixin({WorldRenderer.class})
@@ -50,14 +51,24 @@ public class WorldRendererMixin {
             at = {@At("TAIL")}
     )
     public void eden_renderLevel(MatrixStack poseStack, float f, long l, boolean bl, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightTexture, Matrix4f matrix4f, CallbackInfo info) {
-        this.renderMushroomFrame2(poseStack, camera);
+        this.renderCloudFrame(poseStack, camera);
     }
 
-    private void renderMushroomFrame2(MatrixStack poseStack, Camera camera) {
+    private void renderCloudFrame(MatrixStack poseStack, Camera camera) {
         ItemStack item = this.client.player.getMainHandStack();
 
         if (this.client.crosshairTarget != null && this.client.crosshairTarget instanceof BlockHitResult) {
-            if ((item == null || item.getItem() instanceof BlockItem) && ( ((BlockItem) item.getItem()).getBlock() instanceof CloudBlock)) {
+
+            boolean canShow = false;
+
+            try {
+                Block block = ((BlockItem) item.getItem()).getBlock();
+                canShow = block instanceof CloudAttribute;
+            }catch (Throwable e){
+//                e.printStackTrace();
+            }
+
+            if (canShow){
                 poseStack.push();
                 BlockHitResult bnr = (BlockHitResult) this.client.crosshairTarget;
                 if (this.client.world.getBlockState(bnr.getBlockPos()).isAir()) {

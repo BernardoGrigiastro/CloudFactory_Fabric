@@ -3,14 +3,18 @@ package com.kenza.cloud.block
 import com.kenza.cloud.CloudFactoryMod
 import com.kenza.cloud.CloudFactoryMod.Companion.CLOUD_GENERATOR_HANDLER
 import com.kenza.cloud.block.clouds.CloudBlock
+import com.kenza.cloud.block.clouds.CloudSlab
+import com.kenza.cloud.block.clouds.CloudStairs
 import com.kenza.cloud.item.CloudBlockItem
 import com.kenza.cloud.makeID
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricMaterialBuilder
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.block.MapColor
 import net.minecraft.block.Material
 import net.minecraft.item.BlockItem
 import net.minecraft.item.Item
@@ -25,6 +29,10 @@ object Blocks {
     lateinit var CLOUD_GENERATOR_ITEM: BlockItem
 
     var CLOUD_BLOCKS = ArrayList<Block>()
+
+    var CLOUD_STAIRS_BLOCKS = ArrayList<Block>()
+
+    var CLOUD_SLAB_BLOCKS = ArrayList<Block>()
 
 
     val MOD_COLORS = listOf<String>(
@@ -48,18 +56,27 @@ object Blocks {
         it
     }
 
+    val CLOUD = FabricMaterialBuilder(MapColor.WHITE).notSolid().allowsMovement().lightPassesThrough().destroyedByPiston().build()
+
+    val fabricSettings by lazy {
+        FabricBlockSettings.of(CLOUD).strength(0.25f).hardness(0.2f).sounds(BlockSoundGroup.SNOW)
+//        FabricBlockSettings.of(Material.LEAVES).strength(0.25f).hardness(0.2f).sounds(BlockSoundGroup.SNOW)
+            .dynamicBounds()
+            .nonOpaque()
+    }
 
 
-    fun configsMachines(){
+    fun configsMachines() {
         CLOUD_GENERATOR_HANDLER = CloudGeneratorBlock.CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
 
         val CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
-            FabricBlockSettings.of(Material.METAL)
+            FabricBlockSettings.of(Material.STONE)
                 .requiresTool()
                 .luminance { state ->
                     return@luminance if (state.get(CloudGeneratorBlock.ACTIVE)) 15 else 0
                 }
-                .strength(6f),
+//                .hardness(2f)
+                .strength(2f),
             ::CloudGeneratorHandler
         )
 
@@ -73,19 +90,20 @@ object Blocks {
         }
 
 
-        Registry.register(Registry.BLOCK_ENTITY_TYPE,
+        Registry.register(
+            Registry.BLOCK_ENTITY_TYPE,
             CloudGeneratorBlock.CLOUD_GENERATOR_ID,
             CloudFactoryMod.CLOUD_GENERATOR_TYPE
         )
 
         Registry.register(Registry.BLOCK, CloudGeneratorBlock.CLOUD_GENERATOR_ID, CLOUD_GENERATOR_BLOCK)
 
-        CLOUD_GENERATOR_ITEM =  BlockItem(CLOUD_GENERATOR_BLOCK, FabricItemSettings().group(CloudFactoryMod.MOD_GROUP))
+        CLOUD_GENERATOR_ITEM = BlockItem(CLOUD_GENERATOR_BLOCK, FabricItemSettings().group(CloudFactoryMod.MOD_GROUP))
         Registry.register(Registry.ITEM, CloudGeneratorBlock.CLOUD_GENERATOR_ID, CLOUD_GENERATOR_ITEM)
     }
 
 
-    fun configCloudsBlocks(){
+    fun configCloudsBlocks() {
 
         CloudFactoryMod.MOD_GROUP = FabricItemGroupBuilder.build(
             makeID("group_tab")
@@ -96,30 +114,58 @@ object Blocks {
 
         MOD_COLORS.forEach { color ->
 
-            val blockName = "cloud_$color"
-            val cloudBLock = registerCloudBlockItem(color) ?: return@forEach
-            val item = registerBlockItem(blockName,cloudBLock )
+            val blockName = "cloud_${color}_block"
+            val cloudBLock = registerCloudBlockItem(blockName) ?: return@forEach
+            val item = registerBlockItem(blockName, cloudBLock)
 
-            if(color == "light_blue" ) {
+            if (color == "light_blue") {
                 CloudFactoryMod.DEFAULT_TAB_GROUP_ITEM = item?.defaultStack
             }
 
             CLOUD_BLOCKS.add(cloudBLock)
         }
 
+
+        MOD_COLORS.forEach { color ->
+            registerCloudStairsItem(color)
+        }
+
+        MOD_COLORS.forEach { color ->
+            registerCloudSlabItem(color)
+        }
     }
 
 
+    private fun registerCloudSlabItem(color: String): Block? {
+        val blockName = "cloud_${color}_slab"
 
-    private fun registerCloudBlockItem(color : String): Block? {
-
-        val blockName = "cloud_$color"
-
-        val cloudBLock = CloudBlock(
-            FabricBlockSettings.of(Material.POWDER_SNOW).strength(0.25f).sounds(BlockSoundGroup.SNOW)
-                .dynamicBounds()
-                .nonOpaque()
+        val cloudBLock = CloudSlab(
+            fabricSettings
         )
+
+        return registerBlock(blockName, cloudBLock)?.apply {
+            CLOUD_SLAB_BLOCKS.add(this)
+        }
+    }
+
+    private fun registerCloudStairsItem(color: String): Block? {
+
+        val blockName = "cloud_${color}_stairs"
+
+        val cloudBLock = CloudStairs(
+            CLOUD_BLOCKS.first().defaultState, fabricSettings
+        )
+
+        return registerBlock(blockName, cloudBLock)?.apply {
+            CLOUD_STAIRS_BLOCKS.add(this)
+        }
+    }
+
+
+    private fun registerCloudBlockItem(blockName: String): Block? {
+
+
+        val cloudBLock = CloudBlock(fabricSettings)
 
         return registerBlockWithoutBlockItem(blockName, cloudBLock)
     }

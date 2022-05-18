@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "cloud_factory:cloud_light_blue_block"
+    }
+  },
+  "result": {
+    "item": "cloud_factory:cloud_light_blue_stairs",
+    "count": 4
+  }
+}

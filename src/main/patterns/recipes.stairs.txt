@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "%2:%3"
+    }
+  },
+  "result": {
+    "item": "%4:%1",
+    "count": 4
+  }
+}

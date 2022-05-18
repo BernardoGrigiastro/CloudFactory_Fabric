@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "cloud_factory:block/cloud_orange_slab"
+    },
+    "type=double": {
+      "model": "cloud_factory:block/cloud_orange_block"
+    },
+    "type=top": {
+      "model": "cloud_factory:block/cloud_orange_slab_top"
+    }
+  }
+}
