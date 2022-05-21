@@ -59,5 +59,11 @@
     "sounds": [
       { "name": "cloud_factory:record/anthem_ukraine", "stream": true}
     ]
+  },
+  "profession.cloud_tinker": {
+    "category": "ambient",
+    "sounds": [
+      { "name": "cloud_factory:profession/cloud_tinker", "stream": true}
+    ]
   }
 }

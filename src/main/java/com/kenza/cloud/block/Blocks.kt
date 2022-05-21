@@ -25,6 +25,8 @@ import registerScreenHandler
 object Blocks {
 
     lateinit var CLOUD_GENERATOR_ITEM: BlockItem
+    lateinit var CLOUD_GENERATOR_BLOCK: CloudGeneratorBlock
+
 
     var CLOUD_BLOCKS = ArrayList<Block>()
 
@@ -73,7 +75,7 @@ object Blocks {
     fun configsMachines() {
         CLOUD_GENERATOR_HANDLER = CloudGeneratorBlock.CLOUD_GENERATOR_ID.registerScreenHandler(::CloudGeneratorHandler)
 
-        val CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
+        CLOUD_GENERATOR_BLOCK = CloudGeneratorBlock(
             FabricBlockSettings.of(Material.STONE)
                 .requiresTool()
                 .luminance { state ->

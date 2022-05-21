@@ -18,7 +18,7 @@ import net.minecraft.util.math.Direction
 import net.minecraft.util.registry.Registry
 
 
-fun Any.random(from: Int, to: Int) = (Math.random() * (to - from) + from).toInt()
+fun Any.intFromRange(from: Int, to: Int) = (Math.random() * (to - from) + from).toInt()
 
 
 val EMPTY_INT_ARRAY = intArrayOf()

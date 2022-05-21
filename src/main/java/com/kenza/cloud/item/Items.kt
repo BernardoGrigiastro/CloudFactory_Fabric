@@ -13,11 +13,13 @@ import net.minecraft.util.registry.Registry
 object Items {
 
 
+    lateinit var ALUMENTUM_ITEM: AlumentumItem
+
     fun configCustomItems() {
 
-        val alumentum = Registry.register(Registry.ITEM, Identifier(CloudFactoryMod.MOD_ID, "alumentum"), AlumentumItem(FabricItemSettings().group(CloudFactoryMod.MOD_GROUP)))
+        ALUMENTUM_ITEM = Registry.register(Registry.ITEM, Identifier(CloudFactoryMod.MOD_ID, "alumentum"), AlumentumItem(FabricItemSettings().group(CloudFactoryMod.MOD_GROUP)))
 
-        FuelRegistry.INSTANCE.add(alumentum, 1600 * 8)
+        FuelRegistry.INSTANCE.add(ALUMENTUM_ITEM, 1600 * 8)
 
         registerItem("pegasus_amulet")
         registerItem("pegasus_belt")

@@ -1,4 +1,4 @@
-package com.kenza.cloud.item
+package com.kenza.cloud.mod
 
 import com.kenza.cloud.CloudFactoryMod.Companion.MOD_GROUP
 import com.kenza.cloud.CloudFactoryMod.Companion.MOD_ID
@@ -48,7 +48,7 @@ object DiscsItems {
 
     }
 
-    private fun registerSoundEvent(path: String?): SoundEvent {
+    fun registerSoundEvent(path: String?): SoundEvent {
         val id = Identifier(MOD_ID, path)
         return Registry.register(Registry.SOUND_EVENT, id, SoundEvent(id))
     }
