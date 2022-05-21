@@ -15,6 +15,32 @@
   "block.cloud_factory.cloud_green": "Green Cloud",
   "block.cloud_factory.cloud_red": "Red Cloud",
   "block.cloud_factory.cloud_black": "Black Cloud",
+  
+  "item.cloud_factory.music_disc_spectacular": "Fin - Spectacular",
+  "item.cloud_factory.music_disc_spectacular.desc": "Spectacular",
+  "item.cloud_factory.music_disc_adventurous_pony": "Flyghtning - The Adventurer",
+  "item.cloud_factory.music_disc_adventurous_pony.desc": "The Adventurer",
+  "item.cloud_factory.music_disc_archaic_adventure": "Xyresic - Archaic Adventure",
+  "item.cloud_factory.music_disc_archaic_adventure.desc": "Archaic Adventure",
+  "item.cloud_factory.music_disc_beneath_clouds": "Thrasher & Night Crow - Beneath Clouds",
+  "item.cloud_factory.music_disc_beneath_clouds.desc": "Beneath Clouds",
+  "item.cloud_factory.music_disc_determined_to_fly": "MRPPony - Determined to Fly",
+  "item.cloud_factory.music_disc_determined_to_fly.desc": "Determined to Fly",
+  "item.cloud_factory.music_disc_electro_horse": "iblank2apples - Electro Horse",
+  "item.cloud_factory.music_disc_electro_horse.desc": "Electro Horse",
+
+  "item.cloud_factory.music_disc_space_junk_galaxy": "VGR - Space Junk Galaxy",
+  "item.cloud_factory.music_disc_space_junk_galaxy.desc": "Space Junk Galaxy",
+
+  "item.cloud_factory.music_disc_night_out": "Dj Gestap - Night Out 17",
+  "item.cloud_factory.music_disc_night_out.desc": "Night Out 17",
+
+  "item.cloud_factory.music_disc_midnight": "Radiarc - Midnight",
+  "item.cloud_factory.music_disc_midnight.desc": "Midnight",
+
+  "item.cloud_factory.music_disc_anthem_ukraine": "Anthem of Ukraine - Glory to Ukraine",
+  "item.cloud_factory.music_disc_anthem_ukraine.desc": "Glory To Ukraine! Glory to the heroes!",
+  
 
   "block.cloud_factory.cloud_generator": "Cloud Generator",
 

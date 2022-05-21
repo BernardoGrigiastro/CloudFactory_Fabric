@@ -9,9 +9,13 @@ import com.kenza.cloud.block.CloudGeneratorBlock.Companion.CLOUD_GENERATOR_ID
 import com.kenza.cloud.block.CloudGeneratorBlockEntity
 import com.kenza.cloud.block.CloudGeneratorHandler
 import com.kenza.cloud.datagen.DataGeneratorManager
+import com.kenza.cloud.item.DiscsItems.onConfigDiscSongs
 import com.kenza.cloud.item.Items.configCustomItems
 import com.kenza.cloud.recipe.Recipes.configRecipes
 import com.kenza.cloud.utils.openLastWorldOnInit
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -58,11 +62,16 @@ class CloudFactoryMod : ModInitializer {
 
     fun onConfig() {
 
+
         configCloudsBlocks()
 
+
+        onConfigDiscSongs()
         configCustomItems()
+
         configRecipes()
         configsMachines()
+
     }
 
 

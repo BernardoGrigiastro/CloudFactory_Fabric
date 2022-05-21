@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "cloud_factory:item/music_disc_adventurous_pony"
+  }
+}

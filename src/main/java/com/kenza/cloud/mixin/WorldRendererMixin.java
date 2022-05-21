@@ -46,11 +46,12 @@ public class WorldRendererMixin {
         bufferBuilder = Tessellator.getInstance().getBuffer();
     }
 
+
     @Inject(
             method = {"render"},
             at = {@At("TAIL")}
     )
-    public void eden_renderLevel(MatrixStack poseStack, float f, long l, boolean bl, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightTexture, Matrix4f matrix4f, CallbackInfo info) {
+    public void inject_renderCloudFrame(MatrixStack poseStack, float f, long l, boolean bl, Camera camera, GameRenderer gameRenderer, LightmapTextureManager lightTexture, Matrix4f matrix4f, CallbackInfo info) {
         this.renderCloudFrame(poseStack, camera);
     }
 

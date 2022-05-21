@@ -6,7 +6,9 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.block.Material
+import net.minecraft.item.MusicDiscItem
 import net.minecraft.tag.BlockTags
+import net.minecraft.tag.ItemTags
 import net.minecraft.util.registry.Registry
 
 class CloudFactoryDatagen : DataGeneratorEntrypoint {
@@ -14,10 +16,29 @@ class CloudFactoryDatagen : DataGeneratorEntrypoint {
 
         datagen.output
 
-        datagen.addProvider(CloudFactoryDatagen::IRBlockTagProvider)
+        datagen.addProvider(CloudFactoryDatagen::ModBlockTagProvider)
+        datagen.addProvider(CloudFactoryDatagen::ModItemTagProvider)
+
     }
 
-    class IRBlockTagProvider(datagen: FabricDataGenerator) : FabricTagProvider.BlockTagProvider(datagen) {
+    class ModItemTagProvider(datagen: FabricDataGenerator) : FabricTagProvider.ItemTagProvider(datagen) {
+
+        override fun generateTags() {
+
+            Registry.ITEM.ids.forEach { id ->
+                if (id.namespace == MOD_ID) {
+                    val item = Registry.ITEM.get(id)
+
+                    if (item is MusicDiscItem) {
+//                        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(item)
+                    }
+                }
+            }
+        }
+
+    }
+
+    class ModBlockTagProvider(datagen: FabricDataGenerator) : FabricTagProvider.BlockTagProvider(datagen) {
         override fun generateTags() {
             Registry.BLOCK.ids.forEach { id ->
                 if (id.namespace == MOD_ID) {
@@ -46,6 +67,7 @@ class CloudFactoryDatagen : DataGeneratorEntrypoint {
                     }
                 }
             }
+
         }
 
     }

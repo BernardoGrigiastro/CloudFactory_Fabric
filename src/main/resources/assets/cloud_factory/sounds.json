@@ -1,0 +1,63 @@
+{
+  "record.spectacular": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/spectacular", "stream": true}
+    ]
+  },
+  "record.adventurous_pony": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/adventurous_pony", "stream": true}
+    ]
+  },
+
+  "record.archaic_adventure": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/archaic_adventure", "stream": true}
+    ]
+  },
+  "record.beneath_clouds": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/beneath_clouds", "stream": true}
+    ]
+  },
+  "record.determined_to_fly": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/determined_to_fly", "stream": true}
+    ]
+  },
+  "record.electro_horse": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/electro_horse", "stream": true}
+    ]
+  },
+  "record.space_junk_galaxy": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/space_junk_galaxy", "stream": true}
+    ]
+  },
+  "record.night_out": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/night_out", "stream": true}
+    ]
+  },
+  "record.midnight": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/midnight", "stream": true}
+    ]
+  },
+  "record.anthem_ukraine": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/anthem_ukraine", "stream": true}
+    ]
+  }
+}
