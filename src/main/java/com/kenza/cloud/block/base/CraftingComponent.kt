@@ -41,17 +41,20 @@ class CraftingComponent(val entity: CloudGeneratorBlockEntity) :
         if (hasRecipe()) {
             if (hasFuelInFuelSlot() && !isConsumingFuel()) {
                 consumeFuel()
+                oldBlockEntity?.isMarkedForUpdate = true
             }
             if (isConsumingFuel()) {
 
-                progressTime ++
+                progressTime++
 
                 if (progressTime > maxProgressTime) {
                     craftItem()
+                    oldBlockEntity?.isMarkedForUpdate = true
                 }
             }
         } else {
             resetProgress()
+            oldBlockEntity?.isMarkedForUpdate = true
         }
 
 
@@ -59,7 +62,10 @@ class CraftingComponent(val entity: CloudGeneratorBlockEntity) :
             world.setBlockState(blockPos, state.with(ACTIVE, isConsumingFuel()))
         }
 
-        oldBlockEntity?.sync()
+        if (fuelTime != 0) {
+            oldBlockEntity?.isMarkedForUpdate = true
+        }
+
     }
 
     var progressTime = 0

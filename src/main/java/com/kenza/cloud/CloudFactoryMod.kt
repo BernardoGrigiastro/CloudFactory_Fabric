@@ -8,6 +8,7 @@ import com.kenza.cloud.block.CloudGeneratorHandler
 import com.kenza.cloud.datagen.DataGeneratorManager
 import com.kenza.cloud.mod.DiscsItems.onConfigDiscSongs
 import com.kenza.cloud.item.Items.configCustomItems
+import com.kenza.cloud.mod.Effects.configEffects
 import com.kenza.cloud.mod.Professions.configProfessions
 import com.kenza.cloud.recipe.Recipes.configRecipes
 import com.kenza.cloud.utils.openLastWorldOnInit
@@ -47,9 +48,7 @@ class CloudFactoryMod : ModInitializer {
 
     fun onConfig() {
 
-
         configCloudsBlocks()
-
 
         onConfigDiscSongs()
         configCustomItems()
@@ -59,6 +58,7 @@ class CloudFactoryMod : ModInitializer {
 
         configProfessions()
 
+        configEffects()
     }
 
 
@@ -102,5 +102,6 @@ fun makeID(path: String?): Identifier {
 }
 
 fun Any.debug(msg: String) {
-    CloudFactoryMod.LOGGER.debug(msg)
+//    CloudFactoryMod.LOGGER.debug(msg)
+    System.out.println(msg)
 }

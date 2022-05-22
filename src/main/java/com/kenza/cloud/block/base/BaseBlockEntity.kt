@@ -17,7 +17,11 @@ abstract class BaseBlockEntity(type: BlockEntityType<CloudGeneratorBlockEntity>?
 
     open val guiSyncableComponent: GuiSyncableComponent? = null
 
+
     fun sync() {
+        if(world?.isClient == true){
+            return
+        }
         Preconditions.checkNotNull(world) // Maintain distinct failure case from below
         check(world is ServerWorld) { "Cannot call sync() on the logical client! Did you check world.isClient first?" }
         (world as ServerWorld).chunkManager.markForUpdate(getPos())
