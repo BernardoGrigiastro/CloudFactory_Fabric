@@ -48,3 +48,4 @@ val <T> Optional<T>.value: T?
 fun Any.isRenderThread(): Boolean {
     return Thread.currentThread().name.equals("Render thread")
 }
+

@@ -2,6 +2,7 @@ package com.kenza.cloud.block.clouds
 
 import com.kenza.cloud.provider.EntityProvider
 import com.kenza.cloud.provider.LivingEntityProvider
+import com.kenza.cloud.usecase.CloudUseCase.canWalkOnCloud
 import net.minecraft.block.*
 import net.minecraft.block.enums.BlockHalf
 import net.minecraft.block.enums.SlabType
@@ -170,7 +171,7 @@ interface CloudAttribute {
         if (entity !is LivingEntity || entity.getBlockStateAtPos().isOf(this)) {
 
 
-            if (!PowderSnowBlock.canWalkOnPowderSnow(entity)) {
+            if (!canWalkOnCloud(entity)) {
                 (entity as? EntityProvider)?.cloudMovementMultiplier = Vec3d(0.6, 0.3, 0.6)
             } else {
                 if (entity.isSneaking) {
@@ -226,7 +227,7 @@ interface CloudAttribute {
 
         if (context is EntityShapeContext && entity != null) {
             val bl = entity is FallingBlockEntity
-            if (bl || PowderSnowBlock.canWalkOnPowderSnow(entity) && context.isAbove(
+            if (bl || canWalkOnCloud(entity) && context.isAbove(
                     VoxelShapes.fullCube(),
                     pos,
                     false

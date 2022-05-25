@@ -4,13 +4,13 @@
   "package": "com.kenza.cloud.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "BrewingRecipeRegistryMixin",
     "EntityMixin",
-    "LivingEntityMixin",
+    "LivingEntityMixin"
   ],
   "client": [
     "CameraMixin",
     "WorldRendererMixin"
-
   ],
   "injectors": {
     "defaultRequire": 1

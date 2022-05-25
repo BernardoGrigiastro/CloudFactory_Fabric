@@ -9,6 +9,7 @@ import com.kenza.cloud.datagen.DataGeneratorManager
 import com.kenza.cloud.mod.DiscsItems.onConfigDiscSongs
 import com.kenza.cloud.item.Items.configCustomItems
 import com.kenza.cloud.mod.Effects.configEffects
+import com.kenza.cloud.mod.Potions.configPotions
 import com.kenza.cloud.mod.Professions.configProfessions
 import com.kenza.cloud.recipe.Recipes.configRecipes
 import com.kenza.cloud.utils.openLastWorldOnInit
@@ -59,6 +60,7 @@ class CloudFactoryMod : ModInitializer {
         configProfessions()
 
         configEffects()
+        configPotions()
     }
 
 
