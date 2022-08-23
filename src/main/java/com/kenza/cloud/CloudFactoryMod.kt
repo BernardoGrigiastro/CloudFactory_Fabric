@@ -7,9 +7,7 @@ import com.kenza.cloud.block.CloudGeneratorBlockEntity
 import com.kenza.cloud.block.CloudGeneratorHandler
 import com.kenza.cloud.datagen.DataGeneratorManager
 import com.kenza.cloud.mod.DiscsItems.onConfigDiscSongs
-import com.kenza.cloud.item.Items.configCustomItems
-import com.kenza.cloud.mod.Effects.configEffects
-import com.kenza.cloud.mod.Potions.configPotions
+import com.kenza.cloud.item.ModItems.configCustomItems
 import com.kenza.cloud.mod.Professions.configProfessions
 import com.kenza.cloud.recipe.Recipes.configRecipes
 import com.kenza.cloud.utils.openLastWorldOnInit
@@ -30,6 +28,7 @@ class CloudFactoryMod : ModInitializer {
     //data get entity @music_disc_cleopona.json SelectedItem
     //give @p iron_pickaxe{Damage:10000} 20
     //data get entity @s SelectedItem
+    // You can also use F3+H in-game to show the ID's of items in-game.
 
     override fun onInitialize() {
 
@@ -58,9 +57,9 @@ class CloudFactoryMod : ModInitializer {
         configsMachines()
 
         configProfessions()
-
-        configEffects()
-        configPotions()
+//
+//        configEffects()
+//        configPotions()
     }
 
 
@@ -83,6 +82,7 @@ class CloudFactoryMod : ModInitializer {
 
         @JvmField
         val MOD_ID = "cloud_factory"
+
 
 
         @JvmField

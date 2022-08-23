@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cloud_factory",
+  "pattern": [
+    "xxx",
+    "xyx",
+    "xzx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:cobblestone"
+    },
+    "y": {
+      "item": "minecraft:blaze_rod"
+    },
+    "z": {
+      "item": "minecraft:snow_block"
+    }
+  },
+  "result": {
+    "item": "cloud_factory:cloud_generator"
+  }
+}

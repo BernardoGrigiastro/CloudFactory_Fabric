@@ -9,8 +9,7 @@ import io.github.cottonmc.cotton.gui.widget.TooltipBuilder
 import io.github.cottonmc.cotton.gui.widget.WWidget
 import io.github.cottonmc.cotton.gui.widget.data.Texture
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.math.MathHelper
 
 //
@@ -183,7 +182,7 @@ fun processBar(blockEntity: BaseBlockEntity, index: Int): WCustomBar {
             val max = properties.get<CraftingComponent>(index).maxProgressTime
             if (max <= 0) return
             val percentage = progress * 100 / max
-            tooltip?.add(TranslatableText("gui.widget.process", percentage).append(LiteralText("%")))
+            tooltip?.add(Text.translatable("gui.widget.process", percentage).append(Text.literal("%")))
         }
     }
 

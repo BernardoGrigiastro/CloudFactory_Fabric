@@ -15,6 +15,7 @@ class SlabBlockGenerator(
 
     val blockstatesOutput = File(rootAssests, "blockstates")
     val loottablesOutput = File(rootData, "loot_tables/blocks")
+    val recipesOutput = File(rootData, "recipes")
 
 
     val tags = HashMap<String, String>()
@@ -51,6 +52,16 @@ class SlabBlockGenerator(
         val key1 = "dropself_$tagSlab"
         tags[key1] = tagSlab
         register(key1, PatternsFactory.LOOTTABLES_SELFDROP(tagSlab, namespace, loottablesOutput))
+
+        val key2 = "recipes_$tagSlab"
+        tags[key2] = tagSlab
+        val tagMaterial = "${material}_block"
+
+        register(key2,
+            PatternsFactory.RECIPES(tagSlab, namespace, tagMaterial, POSTFIX, recipesOutput)
+        )
+
+
     }
 
     companion object {

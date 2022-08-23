@@ -54,12 +54,6 @@
       { "name": "cloud_factory:record/midnight", "stream": true}
     ]
   },
-  "record.anthem_ukraine": {
-    "category": "blocks",
-    "sounds": [
-      { "name": "cloud_factory:record/anthem_ukraine", "stream": true}
-    ]
-  },
   "profession.cloud_tinker": {
     "category": "ambient",
     "sounds": [

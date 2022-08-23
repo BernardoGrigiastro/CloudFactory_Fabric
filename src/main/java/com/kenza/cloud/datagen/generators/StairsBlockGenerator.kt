@@ -56,7 +56,7 @@ class StairsBlockGenerator(
         tags[key2] = tagStairs
         val tagMaterial = "${material}_block"
 
-        register(key2, RECIPES(tagStairs,namespace,  tagMaterial, POSTFIX, recipesOutput))
+        register(key2, RECIPES(tagStairs ,namespace,  tagMaterial, POSTFIX, recipesOutput))
 
     }
 

@@ -30,7 +30,8 @@ class CloudFactoryDatagen : DataGeneratorEntrypoint {
                     val item = Registry.ITEM.get(id)
 
                     if (item is MusicDiscItem) {
-//                        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(item)
+                        getOrCreateTagBuilder(ItemTags.MUSIC_DISCS).add(item)
+                        getOrCreateTagBuilder(ItemTags.CREEPER_DROP_MUSIC_DISCS).add(item)
                     }
                 }
             }

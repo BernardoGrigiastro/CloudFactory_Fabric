@@ -14,6 +14,7 @@ class BlockGenerator(
 
     val blockstatesOutput = File(rootAssests, "blockstates")
     val loottablesOutput = File(rootData, "loot_tables/blocks")
+    val recipesOutput = File(rootData, "recipes")
 
 
     val tags = HashMap<String, String>()
@@ -30,7 +31,7 @@ class BlockGenerator(
         return count / 3
     }
 
-    fun register(material: String) {
+    fun register(material: String, color: String) {
 
         val tag = material + "_" + POSTFIX
         tags[tag] = tag
@@ -45,9 +46,22 @@ class BlockGenerator(
         val key1 = "dropself_$tagBlock"
         tags[key1] = tagBlock
         register(key1, PatternsFactory.LOOTTABLES_SELFDROP(tagBlock, namespace, loottablesOutput))
+
+
+        val key2 = "recipes_$tagBlock"
+        tags[key2] = tagBlock
+        val tagMaterial = "${material}_block"
+
+        register(key2,
+            PatternsFactory.RECIPES2(tagBlock, namespace, tagMaterial, BLOCK_POSTFIX, color ,recipesOutput)
+        )
+
+
+
     }
 
     companion object {
+        val BLOCK_POSTFIX = "cloud_block"
         val POSTFIX = "block"
     }
 }

@@ -21,8 +21,7 @@ object DiscsItems {
         "electro_horse",
         "space_junk_galaxy",
         "night_out",
-        "midnight",
-        "anthem_ukraine"
+        "midnight"
     )
 
     val SONGS_ITEMS = ArrayList<MusicDiscItem>()
@@ -68,7 +67,7 @@ object DiscsItems {
             1, sound, Settings()
                 .maxCount(1)
                 .group(MOD_GROUP)
-                .rarity(Rarity.RARE)
+                .rarity(Rarity.RARE),1
         ) {})
     }
 

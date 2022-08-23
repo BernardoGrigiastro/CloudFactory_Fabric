@@ -38,7 +38,7 @@ class DataGeneratorManager(namespace: String) {
             val color = it.getName()
             stairsBlockGenerator.register("cloud_$color")
             slabBlockGenerator.register("cloud_$color")
-            blockGenerator.register("cloud_$color")
+            blockGenerator.register("cloud_$color" , color)
             wallBlockGenerator.register("cloud_$color")
             fenceBlockGenerator.register("cloud_$color")
             gateBlockGenerator.register("cloud_$color")

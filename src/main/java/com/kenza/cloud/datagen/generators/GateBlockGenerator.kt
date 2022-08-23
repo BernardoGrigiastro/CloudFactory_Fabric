@@ -59,9 +59,19 @@ class GateBlockGenerator(
         register(key2, PatternsFactory.MODELS_ITEMS_PART(tagGate, namespace, PatternsFactory.DEFAULT_POSTFIX))
 
 
+        val key3 = "recipes_$tagGate"
+        tags[key3] = tagGate
+        val tagMaterial = "${material}_block"
+
+        register(key3,
+            PatternsFactory.RECIPES(tagGate, namespace, tagMaterial, POSTFIX_SNOW, recipesOutput)
+        )
+
     }
 
     companion object {
+
+        val POSTFIX_SNOW = "gate.snow"
 
         val POSTFIX0 = "fence_gate"
         val POSTFIX1 = "fence_gate_wall"

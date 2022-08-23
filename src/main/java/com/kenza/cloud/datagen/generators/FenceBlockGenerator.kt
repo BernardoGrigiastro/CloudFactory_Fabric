@@ -57,15 +57,18 @@ class FenceBlockGenerator(
         tags[key2] = tagFence
         register(key2, PatternsFactory.MODELS_ITEMS_PART(tagInventory, namespace, PatternsFactory.DEFAULT_POSTFIX))
 
-//        val key2 = "recipes_$tagStairs"
-//        tags[key2] = tagStairs
-//        val tagMaterial = "${material}_block"
-//
-//        register(key2, PatternsFactory.RECIPES(tagStairs, namespace, tagMaterial, POSTFIX, recipesOutput))
+        val key3 = "recipes_$tagFence"
+        tags[key3] = tagFence
+        val tagMaterial = "${material}_block"
 
+        register(key3,
+            PatternsFactory.RECIPES(tagFence, namespace, tagMaterial, POSTFIX_SNOW, recipesOutput)
+        )
     }
 
     companion object {
+
+        val POSTFIX_SNOW = "fence.snow"
 
         val POSTFIX0 = "fence"
 

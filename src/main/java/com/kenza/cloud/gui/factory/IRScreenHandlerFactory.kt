@@ -22,6 +22,6 @@ open class IRScreenHandlerFactory(
         buf.writeBlockPos(pos)
     }
 
-    override fun getDisplayName(): Text? = null
+    override fun getDisplayName(): Text? = Text.literal("")
 
 }

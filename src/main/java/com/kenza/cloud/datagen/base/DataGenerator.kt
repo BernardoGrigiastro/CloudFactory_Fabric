@@ -5,6 +5,7 @@ import java.io.File
 
 abstract class DataGenerator<T, P>(val defaultDir: File, val namespace: String, val fallback: (T) -> DataFactory<T, P>) {
 
+
     protected val generators = HashMap<T, DataFactory<T, P>>()
 
     init {

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:snowball"
+    },
+    "W": {
+      "item": "cloud_factory:cloud_purple_block"
+    }
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "item": "cloud_factory:cloud_purple_fence_gate"
+  }
+}

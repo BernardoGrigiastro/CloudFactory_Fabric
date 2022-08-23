@@ -63,7 +63,12 @@ class CloudGeneratorBlock(
         else BlockEntityTicker { world, blockPos, blockState, blockEntity -> (blockEntity as? CloudGeneratorBlockEntity)?.tick(world, blockPos, blockState) }
     }
 
-    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+    override fun randomDisplayTick(
+        state: BlockState,
+        world: World,
+        pos: BlockPos,
+        random: net.minecraft.util.math.random.Random,
+    ) {
         if (!state.get(ACTIVE)) {
             return
         }

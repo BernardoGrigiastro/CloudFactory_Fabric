@@ -24,6 +24,8 @@ import registerScreenHandler
 
 object Blocks {
 
+    lateinit var CLOUD_WHITE_BLOCK: Block
+
     lateinit var CLOUD_GENERATOR_ITEM: BlockItem
     lateinit var CLOUD_GENERATOR_BLOCK: CloudGeneratorBlock
 
@@ -129,6 +131,11 @@ object Blocks {
             }
 
             CLOUD_BLOCKS.add(cloudBLock)
+
+
+            if(blockName == "cloud_white_block" ){
+                CLOUD_WHITE_BLOCK = cloudBLock
+            }
         }
 
 

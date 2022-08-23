@@ -58,11 +58,14 @@ class WallBlockGenerator(
         tags[key2] = tagWall
         register(key2, PatternsFactory.MODELS_ITEMS_PART(tagWallInventory, namespace, PatternsFactory.DEFAULT_POSTFIX))
 
-//        val key2 = "recipes_$tagStairs"
-//        tags[key2] = tagStairs
-//        val tagMaterial = "${material}_block"
-//
-//        register(key2, PatternsFactory.RECIPES(tagStairs, namespace, tagMaterial, POSTFIX, recipesOutput))
+
+        val key3 = "recipes_$tagWall"
+        tags[key3] = tagWall
+        val tagMaterial = "${material}_block"
+
+        register(key3,
+            PatternsFactory.RECIPES(tagWall, namespace, tagMaterial, POSTFIX0, recipesOutput)
+        )
 
     }
 

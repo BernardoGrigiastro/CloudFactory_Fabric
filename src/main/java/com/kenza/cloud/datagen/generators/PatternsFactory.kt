@@ -105,5 +105,27 @@ object PatternsFactory {
         }
 
 
+    val RECIPES2: (String, String,  String, String,String, File) -> PattersFactory<String> =
+        { item, namespace, material, postfix, extraMaterial, outputDir ->
+
+            object : PattersFactory<String>() {
+                override fun generate(): String {
+                    val scheme = File(patternsDir, "recipes.${postfix}.txt").readText()
+                    val result = scheme
+                        .replace("%1", item)
+                        .replace("%2", namespace)
+                        .replace("%3", material)
+                        .replace("%4", namespace)
+                        .replace("%5", extraMaterial)
+
+                    return result
+                }
+
+                override fun getOutputDir(): File = outputDir
+
+            }
+        }
+
+
     val DEFAULT_POSTFIX = "default"
 }
