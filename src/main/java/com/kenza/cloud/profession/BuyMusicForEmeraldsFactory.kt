@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.item.*
 import net.minecraft.village.TradeOffers
 import net.minecraft.village.TradeOffer
+import java.util.*
 
 class BuyMusicForEmeraldsFactory(maxUses: Int, experience: Int) : TradeOffers.Factory {
 
@@ -12,7 +13,7 @@ class BuyMusicForEmeraldsFactory(maxUses: Int, experience: Int) : TradeOffers.Fa
     private val experience: Int
     private val multiplier: Float
 
-    override fun create(entity: Entity, random: net.minecraft.util.math.random.Random): TradeOffer {
+    override fun create(entity: Entity, random : Random): TradeOffer {
 
         val itemStack = ItemStack(com.kenza.cloud.item.ModItems.ALUMENTUM_ITEM, 1)
         return TradeOffer(itemStack, ItemStack(Items.EMERALD).apply {

@@ -22,6 +22,7 @@ import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.screen.ScreenHandler
 import net.minecraft.screen.ScreenHandlerContext
+import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
@@ -157,7 +158,7 @@ class CloudGeneratorBlockEntity (pos: BlockPos, state: BlockState) :
     }
 
     override fun getDisplayName(): Text {
-        return Text.literal("CloudGenerator")
+        return LiteralText("CloudGenerator")
     }
 
 

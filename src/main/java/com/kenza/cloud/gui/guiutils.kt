@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.screen.ScreenHandlerContext
 import net.minecraft.text.Text
+import net.minecraft.text.TranslatableText
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -43,7 +44,7 @@ fun SyncedGuiDescription.configure(
 ) {
     panel.setSize(150, 120)
     panel.add(createPlayerInventoryPanel(), 0.0, invPos)
-    val title = WText1(Text.translatable(titleId), HorizontalAlignment.CENTER, 0x404040)
+    val title = WText1(TranslatableText(titleId), HorizontalAlignment.CENTER, 0x404040)
     var titlePos = 4.7
 
 //    ctx.run { world, blockPos ->

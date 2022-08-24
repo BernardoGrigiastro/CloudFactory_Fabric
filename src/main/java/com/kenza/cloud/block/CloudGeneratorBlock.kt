@@ -67,7 +67,7 @@ class CloudGeneratorBlock(
         state: BlockState,
         world: World,
         pos: BlockPos,
-        random: net.minecraft.util.math.random.Random,
+        random: Random,
     ) {
         if (!state.get(ACTIVE)) {
             return

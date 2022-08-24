@@ -7,6 +7,7 @@ package com.kenza.cloud.mod
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.ImmutableSet
 import com.kenza.cloud.CloudFactoryMod
+import com.kenza.cloud.CloudFactoryMod.Companion.MOD_ID
 import com.kenza.cloud.block.Blocks
 import com.kenza.cloud.block.Blocks.CLOUD_WHITE_BLOCK
 import com.kenza.cloud.item.ModItems
@@ -17,8 +18,8 @@ import com.kenza.cloud.mod.DiscsItems.registerSoundEvent
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import net.fabricmc.fabric.api.`object`.builder.v1.trade.TradeOfferHelper
-import net.fabricmc.fabric.api.`object`.builder.v1.villager.VillagerProfessionBuilder
-import net.fabricmc.fabric.api.`object`.builder.v1.world.poi.PointOfInterestHelper
+import net.fabricmc.fabric.mixin.`object`.builder.PointOfInterestTypeAccessor
+import net.fabricmc.fabric.mixin.`object`.builder.VillagerProfessionAccessor
 import net.minecraft.block.Block
 import net.minecraft.entity.Entity
 import net.minecraft.entity.passive.VillagerEntity
@@ -28,13 +29,13 @@ import net.minecraft.item.Items
 import net.minecraft.sound.SoundEvents
 import net.minecraft.util.DyeColor
 import net.minecraft.util.Identifier
-import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.registry.RegistryKey
 import net.minecraft.village.TradeOffer
 import net.minecraft.village.TradeOffers.*
 import net.minecraft.village.VillagerProfession
 import net.minecraft.world.poi.PointOfInterestType
+
 
 object Professions {
 
@@ -44,11 +45,12 @@ object Professions {
     val CLOUD_TINKER_POI = registerPOI("cloud_tinker_poi", Blocks.CLOUD_GENERATOR_BLOCK)
     val CLOUD_TINKER = registerProfession(
         "cloud_tinker",
-        RegistryKey.of(Registry.POINT_OF_INTEREST_TYPE_KEY, Identifier(CloudFactoryMod.MOD_ID, "cloud_tinker_poi"))
-    )
+        CLOUD_TINKER_POI)
+
 
 
     fun configProfessions() {
+        PointOfInterestTypeAccessor.callSetup(CLOUD_TINKER_POI);
 
         // 1 em -> 10 white cloud
 
@@ -69,7 +71,7 @@ object Professions {
         ) { factories ->
             factories.add { entity, random ->
                 TradeOffer(
-                    ItemStack(Items.EMERALD, random.nextBetween(1, 1)),
+                    ItemStack(Items.EMERALD, nextBetween(1, 1)),
                     ItemStack(CLOUD_WHITE_BLOCK, 10),
                     20, 2, 0.02f
                 )
@@ -118,7 +120,7 @@ object Professions {
             }
 
             factories.add { entity, random ->
-                entity.generateDyeOffer(random)
+                entity.generateDyeOffer()
             }
         }
 
@@ -128,11 +130,11 @@ object Professions {
         ) { factories ->
 
             factories.add { entity, random ->
-                entity.generateDyeOffer(random)
+                entity.generateDyeOffer()
             }
 
             factories.add { entity, random ->
-                entity.generateDyeOffer(random)
+                entity.generateDyeOffer()
             }
         }
 
@@ -140,7 +142,7 @@ object Professions {
             CLOUD_TINKER, 5
         ) { factories ->
             factories.add { entity, random ->
-                entity.generateDyeOffer(random)
+                entity.generateDyeOffer()
             }
 
             factories.add { entity, random ->
@@ -212,26 +214,30 @@ object Professions {
     }
 
 
-    fun registerProfession(name: String?, type: RegistryKey<PointOfInterestType?>?): VillagerProfession? {
-        return Registry.register<VillagerProfession, VillagerProfession>(
-            Registry.VILLAGER_PROFESSION, Identifier(CloudFactoryMod.MOD_ID, name),
-            VillagerProfessionBuilder.create().id(Identifier(CloudFactoryMod.MOD_ID, name)).workstation(type).workSound(
+    fun registerProfession(name: String?, type: PointOfInterestType?): VillagerProfession? {
+        return Registry.register(
+            Registry.VILLAGER_PROFESSION, Identifier(MOD_ID, name),
+            VillagerProfessionAccessor.create(
+                name, type, ImmutableSet.of(), ImmutableSet.of(),
                 ENTITY_VILLAGER_WORK_CLOUD_TINKER
-            ).build()
+            )
         )
     }
 
     fun registerPOI(name: String?, block: Block): PointOfInterestType? {
-        return PointOfInterestHelper.register(
-            Identifier(CloudFactoryMod.MOD_ID, name),
-            1, 1, ImmutableSet.copyOf(block.stateManager.states)
+        return Registry.register(
+            Registry.POINT_OF_INTEREST_TYPE, Identifier(MOD_ID, name),
+            PointOfInterestTypeAccessor.callCreate(
+                name,
+                ImmutableSet.copyOf(block.stateManager.states), 1, 1
+            )
         )
     }
 
 
 }
 
-private fun Entity.generateDyeOffer(random: Random): TradeOffer {
+private fun Entity.generateDyeOffer(): TradeOffer {
 
     val offeredItems = (this as VillagerEntity).offers.filter { it.sellItem.item is DyeItem }.map { it.sellItem.item as DyeItem }
     val dyes =   DyeColor.values().subtract(
@@ -248,3 +254,6 @@ private fun Entity.generateDyeOffer(random: Random): TradeOffer {
         20, 3, 0.02f
     )
 }
+
+
+fun Any.nextBetween(from: Int, to: Int) = (Math.random() * (to - from) + from).toInt()

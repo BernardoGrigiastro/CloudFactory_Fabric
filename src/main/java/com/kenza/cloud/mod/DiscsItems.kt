@@ -68,7 +68,7 @@ object DiscsItems {
             1, sound, Settings()
                 .maxCount(1)
                 .group(MOD_GROUP)
-                .rarity(Rarity.RARE),1
+                .rarity(Rarity.RARE)
         ) {})
     }
 
