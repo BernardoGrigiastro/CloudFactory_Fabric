@@ -70,7 +70,7 @@ object Professions {
             factories.add { entity, random ->
                 TradeOffer(
                     ItemStack(Items.EMERALD, random.nextBetween(1, 1)),
-                    ItemStack(CLOUD_WHITE_BLOCK, 10),
+                    ItemStack(CLOUD_WHITE_BLOCK, 8),
                     20, 2, 0.02f
                 )
             }
@@ -90,8 +90,8 @@ object Professions {
         ) { factories ->
             factories.add { entity, random ->
                 TradeOffer(
-                    ItemStack(Items.EMERALD, 1),
-                    ItemStack(ModItems.ALUMENTUM_ITEM, random.nextBetween(4, 8)),
+                    ItemStack(Items.EMERALD, random.nextBetween(2, 3)),
+                    ItemStack(ModItems.ALUMENTUM_ITEM, random.nextBetween(4, 6)),
                     20, 5, 0.02f
                 )
             }
