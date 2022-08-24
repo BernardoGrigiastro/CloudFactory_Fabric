@@ -30,8 +30,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import paulevs.edenring.items.BalloonMushroomBlockItem;
-import paulevs.edenring.registries.EdenBlocks;
 
 import static com.kenza.cloud.CloudFactoryMod.MOD_ID;
 

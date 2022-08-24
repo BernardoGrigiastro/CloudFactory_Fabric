@@ -41,13 +41,18 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 5,
           "name": "cloud_factory:music_disc_electro_horse"
         },
         {
           "type": "minecraft:item",
           "weight": 5,
           "name": "cloud_factory:music_disc_midnight"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "cloud_factory:music_disc_rainbow_factory"
         },
         {
           "type": "minecraft:empty",

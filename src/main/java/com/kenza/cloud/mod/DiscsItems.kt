@@ -21,7 +21,8 @@ object DiscsItems {
         "electro_horse",
         "space_junk_galaxy",
         "night_out",
-        "midnight"
+        "midnight",
+        "rainbow_factory"
     )
 
     val SONGS_ITEMS = ArrayList<MusicDiscItem>()

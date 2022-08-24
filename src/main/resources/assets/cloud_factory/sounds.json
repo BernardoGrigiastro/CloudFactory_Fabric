@@ -54,6 +54,12 @@
       { "name": "cloud_factory:record/midnight", "stream": true}
     ]
   },
+  "record.rainbow_factory": {
+    "category": "blocks",
+    "sounds": [
+      { "name": "cloud_factory:record/rainbow_factory", "stream": true}
+    ]
+  },
   "profession.cloud_tinker": {
     "category": "ambient",
     "sounds": [
