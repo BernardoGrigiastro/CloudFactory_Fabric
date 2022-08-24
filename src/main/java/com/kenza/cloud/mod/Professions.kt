@@ -70,7 +70,7 @@ object Professions {
             factories.add { entity, random ->
                 TradeOffer(
                     ItemStack(Items.EMERALD, random.nextBetween(1, 1)),
-                    ItemStack(CLOUD_WHITE_BLOCK, 20),
+                    ItemStack(CLOUD_WHITE_BLOCK, 10),
                     20, 2, 0.02f
                 )
             }
@@ -217,7 +217,7 @@ object Professions {
             Registry.VILLAGER_PROFESSION, Identifier(CloudFactoryMod.MOD_ID, name),
             VillagerProfessionBuilder.create().id(Identifier(CloudFactoryMod.MOD_ID, name)).workstation(type).workSound(
                 ENTITY_VILLAGER_WORK_CLOUD_TINKER
-            ).workSound(SoundEvents.ENTITY_VILLAGER_WORK_ARMORER).build()
+            ).build()
         )
     }
 
