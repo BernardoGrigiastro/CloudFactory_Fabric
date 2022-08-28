@@ -1,18 +1,18 @@
 package com.kenza.cloud.mixin;
 
+import com.kenza.cloud.block.clouds.CloudAttribute;
 import com.kenza.cloud.provider.EntityProvider;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,12 +22,15 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static com.kenza.cloud.utils.Java.convertInstanceOfObject;
+import java.util.Optional;
 
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements EntityProvider {
 
+
+    @Shadow
+    protected static int FALL_FLYING_FLAG_INDEX;
 
     private Vec3d cloudMovementMultiplier = Vec3d.ZERO;
 
@@ -48,6 +51,13 @@ public abstract class EntityMixin implements EntityProvider {
     private boolean onGround;
 
     @Shadow
+    public abstract Vec3d getEyePos();
+
+    @Shadow
+    public Vec3d movementMultiplier;
+
+
+    @Shadow
     public float fallDistance;
 
     private int douleJumpCount = 0;
@@ -56,6 +66,31 @@ public abstract class EntityMixin implements EntityProvider {
     @Shadow
     protected abstract void fall(double heightDifference, boolean onGround, BlockState landedState, BlockPos landedPosition);
 
+
+    @Shadow
+    protected abstract boolean getFlag(int index);
+    @Shadow
+    protected abstract void setFlag(int index, boolean value) ;
+
+    @Shadow
+    public World world;
+
+    @Shadow
+    public abstract BlockPos getBlockPos();
+
+    @Shadow
+    public abstract boolean isInsideWall();
+
+    @Shadow
+    private EntityDimensions dimensions;
+
+    @Shadow public abstract void setPosition(Vec3d pos);
+
+    @Shadow public abstract double getX();
+
+    @Shadow public abstract double getY();
+
+    @Shadow public abstract double getZ();
 
     @Inject(method = "Lnet/minecraft/entity/Entity;<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;initDataTracker()V"))
@@ -80,15 +115,85 @@ public abstract class EntityMixin implements EntityProvider {
     }
 
 
+    @Inject(method = "Lnet/minecraft/entity/Entity;fall(DZLnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)V", at = @At("HEAD"), cancellable = true)
+    public void kenza_fix_fall_for_cloud(double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition, CallbackInfo ci) {
+
+        if(state.getBlock() instanceof CloudAttribute){
+//            if (this.fallDistance > 0.0f) {
+//                state.getBlock().onLandedUpon(this.world, state, landedPosition, this, this.fallDistance);
+//                this.world.emitGameEvent(GameEvent.HIT_GROUND, this.pos, GameEvent.Emitter.of(this, this.getSteppingBlockState()));
+//            }
+            fallDistance = 0;
+            ci.cancel();
+        }
+
+    }
+
+
     @ModifyVariable(method = "move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     public Vec3d modify_movement_forCloud(Vec3d movement) {
         if (this.cloudMovementMultiplier.lengthSquared() > 1.0E-7) {
             velocity = velocity.multiply(cloudMovementMultiplier);//0.7f, 1.f, 0.7f);
         }
+
+//        boolean isInsideCloud = isInsideCloud();
+
+        if (this.getFlag(FALL_FLYING_FLAG_INDEX) && isInsideCloud()) {
+
+            BlockPos closeCloudBlockPos = getCloseCloudBlock().get();
+
+
+            velocity = velocity.multiply(Vec3d.ZERO);//0.7f, 1.f, 0.7f);
+            movementMultiplier = Vec3d.ZERO;
+            this.setFlag(FALL_FLYING_FLAG_INDEX, false);
+            movement =  Vec3d.ZERO;
+
+            double new_x = (this.getX() + closeCloudBlockPos.getX() )/2  + 0.3;
+            double new_Y = (this.getY() + closeCloudBlockPos.getY())/2  + 0.3;
+            double new_z = (this.getZ() + closeCloudBlockPos.getZ() )/2  + 0.3;
+            Vec3d vec3 = new Vec3d( new_x,   new_Y,  + new_z);
+            this.setPosition(vec3);
+//            System.out.println("kenza " + this.getFlag(FALL_FLYING_FLAG_INDEX) + " isInsideCloud " + isInsideCloud);
+
+        }
+
+
         return movement;
     }
 
 
+    public boolean isInsideCloud() {
+//        if (this.noClip) {
+//            return false;
+//        }
+//        float f = this.dimensions.width * 0.8f;
+        float f = 1.5f;
+        float h = this.dimensions.height * 0.8f;
+        Box box = Box.of(this.getEyePos(), f, +1.5 * h, f);
+        return BlockPos.stream(box).anyMatch(pos -> {
+            BlockState blockState = this.world.getBlockState((BlockPos) pos);
+
+            boolean x = blockState.getBlock() instanceof CloudAttribute;
+            return x;
+        });
+    }
+
+    public Optional<BlockPos> getCloseCloudBlock() {
+//        if (this.noClip) {
+//            return false;
+//        }
+        float f = 1.5f;
+//        float f = this.dimensions.width * 0.8f;
+        float h = this.dimensions.height * 0.8f;
+        Box box = Box.of(this.getEyePos(), f, +1.5 * h, f);
+        return BlockPos.stream(box).filter( pos -> {
+            BlockState blockState = this.world.getBlockState((BlockPos) pos);
+            boolean x = blockState.getBlock() instanceof CloudAttribute;
+            return x;
+        }).findFirst();
+
+
+    }
 
 
     @Inject(method = "Lnet/minecraft/entity/Entity;move(Lnet/minecraft/entity/MovementType;Lnet/minecraft/util/math/Vec3d;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;fall(DZLnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)V"))
